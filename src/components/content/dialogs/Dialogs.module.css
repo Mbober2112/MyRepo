@@ -1,0 +1,39 @@
+.Dialogs {
+    display: grid;
+    grid-template-areas: 
+    "a b c"
+    "a b d";
+    grid-template-columns: 3fr 1fr 10fr;
+    border-radius: 30px;
+    margin: 20px;
+    position: relative;
+}
+
+.Line {
+    background-color: gray;
+    width: 3px;
+    grid-area: b;
+}
+
+.Users {
+    grid-area: a;
+}
+
+.Messages {
+    grid-area: c;
+}
+
+.Send {
+    grid-area: d;
+    position:absolute;
+    bottom:0;
+}
+
+.Send textarea {
+    resize: none;
+    width: 600px;
+    height: 70px;
+    border-width: 2px;
+    border-color: rgb(58, 56, 56);
+}
+

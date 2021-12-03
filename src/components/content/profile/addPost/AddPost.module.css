@@ -1,0 +1,29 @@
+.AddPost {
+    margin-top: 20px;
+    margin: 20px;
+}
+
+.Text {
+    margin-top: 20px;
+}
+
+.Text textarea {
+    width: 900px;
+    resize: none;
+    height: 300px;
+    border-width: 4px;
+    border-color: rgb(94, 92, 92);
+}
+
+.Title input {
+    width: 300px;
+    border-width: 4px;
+    border-color: rgb(94, 92, 92);
+}
+
+.AddPost p {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 20px;
+    font-weight: bold;
+}

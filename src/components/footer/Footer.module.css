@@ -1,0 +1,15 @@
+.Footer {
+    background-color: rgb(55, 55, 82);
+    color: silver;
+    border-radius: 30px;
+    margin: 20px;
+    text-align: right;
+}
+
+.Text {
+    margin-right: 30px;
+}
+.Footer a {
+    color: silver;
+    margin-right: 30px;
+}

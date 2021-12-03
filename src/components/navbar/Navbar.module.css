@@ -1,0 +1,22 @@
+.Navbar {
+    background-color: rgb(24, 24, 177);
+    border-radius: 30px;
+    margin: 10px;
+}
+
+.Item {
+    margin-left: 40px;
+    font-size: 25px;
+    margin-top: 10px;
+    color: silver;
+    text-decoration: none;
+}
+
+.Item a {
+    text-decoration: none;
+    color: silver;
+}
+
+.Item a.Active {
+    color: rgb(167, 144, 45);
+}

@@ -1,0 +1,30 @@
+.Post {
+    border-radius: 30px;
+    margin: 15px;
+}
+
+.Avatar {
+    width: 50px;
+    margin-top: 20px;
+}
+
+.Username {
+    margin-top: 45px;
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.Post h3 {    
+    font-size: 30px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+}
+
+.Like {
+    width: 20px;
+    margin-right: 10px;
+}
+
+.Counter {
+    margin-right: 30px;
+}

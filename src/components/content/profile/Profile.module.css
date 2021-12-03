@@ -1,0 +1,33 @@
+.Profile {
+    border-radius: 30px;
+    margin: 10px;
+    display: grid;
+    grid-template-areas:
+    "a b"
+    "c c";
+    grid-template-columns: 3fr 8fr;
+}
+
+.Avatar {
+    grid-area: a;
+    width: 150px;
+    border-radius: 100px;
+}
+
+.Info {
+    grid-area: b;
+}
+
+.MyPosts {
+    grid-area: c;
+    padding: 10px;
+}
+
+.MyPosts span {
+    margin-right: 30px;
+}
+
+.MyPosts a {
+    text-decoration: none;
+    color: black;
+}

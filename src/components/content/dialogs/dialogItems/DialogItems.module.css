@@ -1,0 +1,21 @@
+.Avatar {
+    width: 50px;
+}
+
+.User {
+    margin-top: 20px;
+}
+
+.User span {
+    font-size: 20px;
+    margin-left: 20px;
+}
+.User a {
+    text-decoration: none;
+    color: black;
+}
+
+.User a.Active {
+    color: steelblue;
+    font-weight: bold;
+}

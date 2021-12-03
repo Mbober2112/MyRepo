@@ -1,0 +1,33 @@
+.Header {
+    background-color: rgb(24, 24, 177);
+    color: silver;
+    border-radius: 30px;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr 1fr;
+}
+.Header img {
+    width: 100px;
+    height: 100px;
+    margin: 20px;
+}
+.Title {
+    font-size: 50px;
+    font-family: fantasy;
+    text-align: left;
+    margin-top: 40px;
+}
+
+.Enter {
+    font-size: 20px;
+    margin-top: 40px;
+    text-align: left;
+    padding: 30px;
+}
+
+.Registration {
+    font-size: 20px;
+    margin-top: 40px;
+    text-align: left;
+    padding: 30px;
+}
