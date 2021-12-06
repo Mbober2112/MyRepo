@@ -7,13 +7,15 @@ const AddPost = (props) => {
     let newPostTitle = React.createRef();
 
     let addNewPost = () => {
-        props.addPost();
+        let action = {type: 'ADD-POST'};
+        props.dispatch(action);
     }
 
     let onNewPostChange = () => {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
-        props.changeNewPost(title, text);
+        let action = {type: 'CHANGE-NEW-POST', newTitle: title, newText: text};
+        props.dispatch(action);
     }
 
     return(

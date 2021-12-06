@@ -42,59 +42,55 @@ let store = {
     _callSubscriber() {
     },
 
-    addPost() {
-        let newPost = {
-            id: 5,
-            title: this._state.profilePage.newPostTitle,
-            text: this._state.profilePage.newPostText,
-            likes: 0,
-            dislikes: 0
-        }
-    
-        let newAllPost ={
-            id: 5,
-            username: "Username",
-            title: this._state.profilePage.newPostTitle,
-            text: this._state.profilePage.newPostText,
-            likes: 0,
-            dislikes: 0,
-            saved: false
-        }
-    
-        this._state.profilePage.myPostsData.push(newPost);
-        this._state.allPostsPage.allPostsData.push(newAllPost);
-    
-        this._state.profilePage.newPostTitle = "";
-        this._state.profilePage.newPostText = "";
-    
-        this._callSubscriber(this._state);
-    },
-
-    changeNewPost(newTitle, newText) {
-        this._state.profilePage.newPostTitle = newTitle;
-        this._state.profilePage.newPostText = newText;
-        this._callSubscriber(this._state);
-    },
-
-    sendMessage() {
-        let newMessage = {
-            id: 5,
-            message: this._state.dialogsPage.newMessageText,
-        }
-    
-        this._state.dialogsPage.messagesData.push(newMessage);
-        this._state.dialogsPage.newMessageText = "";
-    
-        this._callSubscriber(this._state);
-    },
-
-    changeNewMessage(newMessage) {
-        this._state.dialogsPage.newMessageText = newMessage;
-        this._callSubscriber(this._state);
-    },
-
     subscribe(observer) {
         this._callSubscriber = observer;
+    },
+
+    dispatch(action) {
+        if (action.type == 'ADD-POST'){
+            let newPost = {
+                id: 5,
+                title: this._state.profilePage.newPostTitle,
+                text: this._state.profilePage.newPostText,
+                likes: 0,
+                dislikes: 0
+            }
+        
+            let newAllPost ={
+                id: 5,
+                username: "Username",
+                title: this._state.profilePage.newPostTitle,
+                text: this._state.profilePage.newPostText,
+                likes: 0,
+                dislikes: 0,
+                saved: false
+            }
+        
+            this._state.profilePage.myPostsData.push(newPost);
+            this._state.allPostsPage.allPostsData.push(newAllPost);
+        
+            this._state.profilePage.newPostTitle = "";
+            this._state.profilePage.newPostText = "";
+        
+            this._callSubscriber(this._state);
+        } else if(action.type == 'CHANGE-NEW-POST'){
+            this._state.profilePage.newPostTitle = action.newTitle;
+            this._state.profilePage.newPostText = action.newText;
+            this._callSubscriber(this._state);
+        }else if(action.type == 'SEND-MESSAGE'){
+            let newMessage = {
+                id: 5,
+                message: this._state.dialogsPage.newMessageText,
+            }
+        
+            this._state.dialogsPage.messagesData.push(newMessage);
+            this._state.dialogsPage.newMessageText = "";
+        
+            this._callSubscriber(this._state);
+        }else if(action.type == 'CHANGE-NEW-MESSAGE') {
+            this._state.dialogsPage.newMessageText = action.newMessage;
+            this._callSubscriber(this._state);
+        }
     },
 }
 
