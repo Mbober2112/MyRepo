@@ -13,21 +13,22 @@ import Header from './components/header/Header.jsx';
 import Navbar from './components/navbar/Navbar.jsx';
 
 const App = (props) => {
+  debugger;
   return (
     <div className={c.App}>
       <Header />
       <div className={c.Page}>
         <Navbar />
-        <Route path="/profile" render={() => <Profile profilePage={props.state.profilePage} />} />
+        <Route path="/profile" render={() => <Profile profilePage={props.state.addPostState.profilePage} />} />
         <Route path="/dialogs" render={() => <Dialogs 
         dialogsPage={props.state.dialogsPage} 
         dispatch={props.dispatch}/>} />
-        <Route path="/allposts" render={() => <AllPosts allPostsPage={props.state.allPostsPage} />} />
-        <Route path="/saved" render={() => <Saved allPostsPage={props.state.allPostsPage}/>} />
+        <Route path="/allposts" render={() => <AllPosts allPostsPage={props.state.addPostState.allPostsPage} />} />
+        <Route path="/saved" render={() => <Saved allPostsPage={props.state.addPostState.allPostsPage}/>} />
         <Route path="/addPost" render={() => <AddPost 
           dispatch={props.dispatch}
-          newPostTitle={props.state.profilePage.newPostTitle} 
-          newPostText={props.state.profilePage.newPostText}/>} />
+          newPostTitle={props.state.addPostState.profilePage.newPostTitle} 
+          newPostText={props.state.addPostState.profilePage.newPostText}/>} />
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/settings" render={() => <Settings />} />
       </div>
