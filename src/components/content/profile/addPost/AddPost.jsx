@@ -1,5 +1,4 @@
 import React from 'react';
-import { addPostActionCreator, changeNewPostActionCreator } from '../../../../redux/addPostReducer';
 import c from './AddPost.module.css';
 
 const AddPost = (props) => {
@@ -8,15 +7,13 @@ const AddPost = (props) => {
     let newPostTitle = React.createRef();
 
     let addNewPost = () => {
-        let action = addPostActionCreator();
-        props.dispatch(action);
+        props.addPost();
     }
 
     let onNewPostChange = () => {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
-        let action = changeNewPostActionCreator(title, text);
-        props.dispatch(action);
+        props.newPostChange(title, text);
     }
 
     return(
