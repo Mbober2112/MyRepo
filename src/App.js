@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import c from './App.module.css';
-import AllPosts from './components/content/allPosts/AllPosts';
+import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
 import Friends from './components/content/friends/Friends';
 import AddPostContainer from './components/content/profile/addPost/AddPostContainer';
-import Profile from './components/content/profile/Profile.jsx';
-import Saved from './components/content/saved/Saved';
+import ProfileContainer from './components/content/profile/ProfileContainer';
+import SavedContainer from './components/content/saved/SavedContainer';
 import Settings from './components/content/settings/Settings';
 import Footer from './components/footer/Footer.jsx';
 import Header from './components/header/Header.jsx';
@@ -18,11 +18,11 @@ const App = (props) => {
       <Header />
       <div className={c.Page}>
         <Navbar />
-        <Route path="/profile" render={() => <Profile profilePage={props.state.addPostState.profilePage} />} />
-        <Route path="/dialogs" render={() => <DialogsContainer store={props.store}/>} />
-        <Route path="/allposts" render={() => <AllPosts allPostsPage={props.state.addPostState.allPostsPage} />} />
-        <Route path="/saved" render={() => <Saved allPostsPage={props.state.addPostState.allPostsPage}/>} />
-        <Route path="/addPost" render={() => <AddPostContainer store={props.store} />} />
+        <Route path="/profile" render={() => <ProfileContainer />} />
+        <Route path="/dialogs" render={() => <DialogsContainer />} />
+        <Route path="/allposts" render={() => <AllPostsContainer />} />
+        <Route path="/saved" render={() => <SavedContainer />} />
+        <Route path="/addPost" render={() => <AddPostContainer/>} />
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/settings" render={() => <Settings />} />
       </div>

@@ -1,7 +1,7 @@
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST';
 
-let initialState = {   
+let initialState = {
     profilePage: {
         myPostsData: [
             { id: 4, title: "Пост 4", text: "Текст", likes: 12, dislikes: 3 },
@@ -19,7 +19,7 @@ let initialState = {
             { id: 2, username: "Dima", title: "Заголовок 2", text: "Текст", likes: 21, dislikes: 8, saved: false },
             { id: 1, username: "Anton", title: "Заголовок 1", text: "Текст", likes: 16, dislikes: 2, saved: true },
         ],
-    }, 
+    },
 }
 
 const AddPostReducer = (state = initialState, action) => {
@@ -43,18 +43,29 @@ const AddPostReducer = (state = initialState, action) => {
                 saved: false
             }
 
-            state.profilePage.myPostsData.unshift(newPost);
-            state.allPostsPage.allPostsData.unshift(newAllPost);
-
-            state.profilePage.newPostTitle = "";
-            state.profilePage.newPostText = "";
-
-            return state;
+            return {
+                ...state,
+                profilePage: {
+                    ...state.profilePage,
+                    newPostTitle: '',
+                    newPostText: '',
+                    myPostsData: [newPost, ...state.profilePage.myPostsData],
+                },
+                allPostsPage: {
+                    ...state.allPostsPage,
+                    allPostsData: [newAllPost, ...state.allPostsPage.allPostsData],
+                },
+            }
 
         case CHANGE_NEW_POST:
-            state.profilePage.newPostTitle = action.newTitle;
-            state.profilePage.newPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                profilePage: {
+                    ...state.profilePage,
+                    newPostTitle: action.newTitle,
+                    newPostText: action.newText,
+                },
+            }
 
         default:
             return state;

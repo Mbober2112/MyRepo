@@ -4,7 +4,7 @@ import React from 'react';
 
 const AllPosts = (props) => {
 
-    let allPostsElements = props.allPostsPage.allPostsData.map(
+    let allPostsElements = props.allPostsData.map(
         ap => <Post username={ap.username} title={ap.title} text={ap.text} likes={ap.likes} dislikes={ap.dislikes} />
     );
 

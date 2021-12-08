@@ -5,9 +5,9 @@ import Message from './message/Message';
 
 const Dialogs = (props) => {
 
-    let dialogsElements = props.state.dialogsData.map(d => <DialogItems name={d.name} id={d.id}/>);
+    let dialogsElements = props.dialogsPage.dialogsData.map(d => <DialogItems name={d.name} id={d.id}/>);
 
-    let messagesElements = props.state.messagesData.map(m => <Message message={m.message}/>)
+    let messagesElements = props.dialogsPage.messagesData.map(m => <Message message={m.message}/>)
 
     let newMessageText = React.createRef();
 
@@ -30,7 +30,7 @@ const Dialogs = (props) => {
                 {messagesElements}
             </div>
             <div className={c.Send}>
-                <textarea onChange={onNewMessageChange} ref={newMessageText} value={props.state.newMessageText}></textarea>
+                <textarea onChange={onNewMessageChange} ref={newMessageText} value={props.dialogsPage.newMessageText}></textarea>
                 <div>
                     <button onClick={sendNewMessage}>Отправить сообщение</button>
                 </div>

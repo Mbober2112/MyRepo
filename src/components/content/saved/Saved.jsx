@@ -3,7 +3,7 @@ import SavedPost from './savedPost/SavedPost';
 
 const Saved = (props) => {
 
-    let savedPostsElements = props.allPostsPage.allPostsData.map(
+    let savedPostsElements = props.allPostsData.map(
         (ap) => {
             if (ap.saved === true) {
                 return(

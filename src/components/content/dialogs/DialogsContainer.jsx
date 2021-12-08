@@ -1,24 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { changeNewMessageActionCreator, sendMessageActionCreator } from '../../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 
-const DialogsContainer = (props) => {
-
-    let state = props.store.getState().dialogsPage;
-
-    let sendNewMessage = () => {
-        let action = sendMessageActionCreator();
-        props.store.dispatch(action);
+const mapStateToProps = (state) => {
+    return {
+        dialogsPage: state.dialogsPage,
     }
-
-    let newMessageChange = (message) => {
-        let action = changeNewMessageActionCreator(message);
-        props.store.dispatch(action);
-    }
-
-    return (
-        <Dialogs sendNewMessage={sendNewMessage} newMessageChange={newMessageChange} state={state}/>
-    )
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        sendNewMessage: () => {
+            let action = sendMessageActionCreator();
+            dispatch(action);
+        },
+        newMessageChange: (message) => {
+            let action = changeNewMessageActionCreator(message);
+            dispatch(action);
+        },
+    }
+}
+
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps) (Dialogs);
 
 export default DialogsContainer;

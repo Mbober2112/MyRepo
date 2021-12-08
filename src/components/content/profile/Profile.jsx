@@ -5,14 +5,14 @@ import { NavLink } from 'react-router-dom';
 
 const Profile = (props) => {
 
-    let myPostsElements = props.profilePage.myPostsData.map(
+    let myPostsElements = props.myPostsData.map(
         p => <MyPosts title={p.title} text={p.text} likes={p.likes} dislikes={p.dislikes} />
     );
     
     let raiting = 0;
 
-    for (let i = 0; i<props.profilePage.myPostsData.length; i++) {
-        raiting = raiting + props.profilePage.myPostsData[i].likes - props.profilePage.myPostsData[i].dislikes;
+    for (let i = 0; i<props.myPostsData.length; i++) {
+        raiting = raiting + props.myPostsData[i].likes - props.myPostsData[i].dislikes;
     }
 
     return (
@@ -21,7 +21,7 @@ const Profile = (props) => {
             <div className={c.Info}>
                 <h4>Username</h4><hr />
                 <p>Любимый клуб</p>
-                <p>Количество постов: {props.profilePage.myPostsData.length}</p>
+                <p>Количество постов: {props.myPostsData.length}</p>
                 <p>Рейтинг: {raiting}</p>
             </div>
             <div className={c.MyPosts}>
