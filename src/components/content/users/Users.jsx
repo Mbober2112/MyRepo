@@ -1,11 +1,19 @@
+import * as axios from 'axios';
 import c from './Users.module.css';
+import React from 'react';
 
-const Users = (props) => {
+class Users extends React.Component {
+    constructor(props) {
+        super(props);
+        axios.get('http://localhost:8080/user?id=1').then(response => {
+            props.setUsers(response.data);
+        })
+    }
 
-    return (
-        <div>
+    render() {
+        return <div>
             {
-                props.allUsers.map(au => <div className={c.Users}>
+                this.props.allUsers.map(au => <div className={c.Users}>
                     <div className={c.User}>
                         <div>
                             <img src="https://image.flaticon.com/icons/png/512/108/108186.png" className={c.Avatar} />
@@ -17,11 +25,11 @@ const Users = (props) => {
                             <p>Рейтинг: {au.raiting}</p>
                         </div>
                     </div>
-                    {au.followed ? <button onClick={()=>props.unfollow(au.id)}>Отписаться</button> : <button onClick={()=>props.follow(au.id)}>Подписаться</button>}<hr />    
+                    {au.followed ? <button onClick={() => this.props.unfollow(au.id)}>Отписаться</button> : <button onClick={() => this.props.follow(au.id)}>Подписаться</button>}<hr />
                 </div>)
             }
         </div>
-    )
+    };
 }
 
 export default Users;
