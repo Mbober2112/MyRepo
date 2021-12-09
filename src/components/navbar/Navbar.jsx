@@ -18,6 +18,9 @@ const Navbar = () => {
                 <NavLink to="/saved" activeClassName={c.Active}>-Сохраненное</NavLink>
             </div>
             <div className={c.Item}>
+                <NavLink to="/users" activeClassName={c.Active}>-Пользователи</NavLink>
+            </div>
+            <div className={c.Item}>
                 <NavLink to="/friends" activeClassName={c.Active}>-Друзья</NavLink>
             </div>
             <div className={c.Item}>

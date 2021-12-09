@@ -1,0 +1,21 @@
+.Users {
+    margin: 15px;
+    margin-top: 30px;  
+}
+
+.User {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+
+.Info p, h3 {
+    margin: 5px;
+}
+
+.Info h3 {
+    margin-top: 0px;
+}
+
+.Avatar {
+    width: 100px;
+}

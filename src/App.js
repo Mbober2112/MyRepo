@@ -8,6 +8,7 @@ import AddPostContainer from './components/content/profile/addPost/AddPostContai
 import ProfileContainer from './components/content/profile/ProfileContainer';
 import SavedContainer from './components/content/saved/SavedContainer';
 import Settings from './components/content/settings/Settings';
+import UsersContainer from './components/content/users/UsersContainer';
 import Footer from './components/footer/Footer.jsx';
 import Header from './components/header/Header.jsx';
 import Navbar from './components/navbar/Navbar.jsx';
@@ -23,6 +24,7 @@ const App = (props) => {
         <Route path="/allposts" render={() => <AllPostsContainer />} />
         <Route path="/saved" render={() => <SavedContainer />} />
         <Route path="/addPost" render={() => <AddPostContainer/>} />
+        <Route path="/users" render={() => <UsersContainer />} />
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/settings" render={() => <Settings />} />
       </div>
