@@ -3,10 +3,10 @@ import c from './Users.module.css';
 import React from 'react';
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props);
+
+    componentDidMount () {
         axios.get('http://localhost:8080/user?id=1').then(response => {
-            props.setUsers(response.data);
+            this.props.setUsers(response.data);
         })
     }
 
