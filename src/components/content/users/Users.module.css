@@ -19,3 +19,19 @@
 .Avatar {
     width: 100px;
 }
+
+.Selected {
+    font-weight: bold;
+}
+
+.Pages {
+    text-align: center;
+    font-size: 25px;
+    
+}
+
+.Pages span {
+    margin-right: 10px;
+    border: 2px solid rgb(88, 87, 87);
+    border-radius: 10px;
+}
