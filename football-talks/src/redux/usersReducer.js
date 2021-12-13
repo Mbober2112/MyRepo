@@ -53,10 +53,10 @@ const UsersReducer = (state = initialState, action) => {
     }
 }
 
-export const followAC = (id) => ({ type: FOLLOW, userId: id, });
-export const unfollowAC = (id) => ({ type: UNFOLLOW, userId: id, });
-export const setUsersAC = (users) => ({ type: SET_USERS, users: users, });
-export const setCurrentPageAC = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber, });
-export const setTotalUsersCountAC = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
+export const follow = (id) => ({ type: FOLLOW, userId: id, });
+export const unfollow = (id) => ({ type: UNFOLLOW, userId: id, });
+export const setUsers = (users) => ({ type: SET_USERS, users: users, });
+export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber, });
+export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
 
 export default UsersReducer;

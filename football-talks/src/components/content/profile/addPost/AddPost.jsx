@@ -13,7 +13,7 @@ const AddPost = (props) => {
     let onNewPostChange = () => {
         let title = newPostTitle.current.value;
         let text = newPostText.current.value;
-        props.newPostChange(title, text);
+        props.changeNewPost(title, text);
     }
 
     return(
