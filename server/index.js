@@ -81,8 +81,9 @@ app.post('/user', (req, res, next) => {
     res.sendStatus(200);
 });
 
-app.get('/user/1', (req, res, next) => {
-    let user = users[1].totalUsers[0];
+app.get(`/user/userpage`, (req, res, next) => {
+    let userId = Number(req.query.id);
+    let user = users[1].totalUsers[(userId-1)];
     res.send(user);
 });
 

@@ -19,7 +19,7 @@ const App = (props) => {
       <Header />
       <div className={c.Page}>
         <Navbar />
-        <Route path="/profile" render={() => <ProfileContainer />} />
+        <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
         <Route path="/dialogs" render={() => <DialogsContainer />} />
         <Route path="/allposts" render={() => <AllPostsContainer />} />
         <Route path="/saved" render={() => <SavedContainer />} />

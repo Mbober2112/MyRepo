@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import c from './AddPost.module.css';
 
 const AddPost = (props) => {
@@ -26,7 +27,9 @@ const AddPost = (props) => {
                 <p>Текст поста:</p>
                 <textarea onChange={onNewPostChange} ref={newPostText} value={props.newPostText}></textarea>
             </div>
-            <button onClick={addNewPost}>Добавить пост</button>
+            <NavLink to='/profile'>
+                <button onClick={addNewPost}>Добавить пост</button>
+            </NavLink>
         </div>
     )
 }
