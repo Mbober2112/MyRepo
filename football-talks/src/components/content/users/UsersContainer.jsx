@@ -9,7 +9,6 @@ class UsersContainer extends React.Component {
     
     componentDidMount () {    
         axios.get(`http://localhost:8080/user?id=1&count=${this.props.pageSize}&page=${this.props.currentPage}`).then(response => {
-            
             this.props.setUsers(response.data.usersSend);
             this.props.setTotalUsersCount(response.data.totalCount);
         })
@@ -23,7 +22,6 @@ class UsersContainer extends React.Component {
     }
 
     render() {
-        debugger;
         return <Users 
             totalUsersCount = {this.props.totalUsersCount}
             pageSize = {this.props.pageSize}

@@ -81,5 +81,10 @@ app.post('/user', (req, res, next) => {
     res.sendStatus(200);
 });
 
+app.get('/user/1', (req, res, next) => {
+    let user = users[1].totalUsers[0];
+    res.send(user);
+});
+
 
 app.listen(8080, () => {console.log('started')} );

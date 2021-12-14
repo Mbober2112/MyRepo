@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import c from './Users.module.css';
 
 
@@ -17,7 +18,9 @@ const Users = (props) => {
                 props.allUsers.map(au => <div className={c.Users}>
                     <div className={c.User}>
                         <div>
-                            <img src="https://image.flaticon.com/icons/png/512/108/108186.png" className={c.Avatar} />
+                            <NavLink to={'/profile/'+au.id} >
+                                <img src="https://image.flaticon.com/icons/png/512/108/108186.png" className={c.Avatar} />
+                            </NavLink>
                         </div>
                         <div className={c.Info}>
                             <h3 className={c.Username}>{au.name}</h3>
