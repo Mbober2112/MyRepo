@@ -10,9 +10,12 @@ class ProfileContainer extends React.Component{
     componentDidMount () {  
         let userId = this.props.match.params.userId; 
         if (!userId) {
-            userId = 1;
+            userId = 'none';
         }
-        axios.get(`http://localhost:8080/user/userpage?id=${userId}`).then(response => {
+        axios.get(`http://localhost:8080/user/userpage?id=${userId}`, {headers:{token: this.props.token}}).then(response => {
+            
+            debugger;
+            
             this.props.setUserProfile(response.data);
         })
     }
@@ -30,6 +33,7 @@ const mapStateToProps = (state) => {
     return {
         myPostsData: state.addPostState.profilePage.myPostsData,
         profile: state.profilePageData.profile,
+        token: state.auth.token,
     }
 }
 

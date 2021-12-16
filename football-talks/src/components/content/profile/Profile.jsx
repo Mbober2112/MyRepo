@@ -5,10 +5,6 @@ import { NavLink } from 'react-router-dom';
 
 const Profile = (props) => {
 
-    let myPostsElements = props.myPostsData.map(
-        p => <MyPosts title={p.title} text={p.text} likes={p.likes} dislikes={p.dislikes} />
-    );
-    
     let raiting = 0;
 
     for (let i = 0; i<props.myPostsData.length; i++) {
@@ -19,6 +15,16 @@ const Profile = (props) => {
         return <div></div>
     }
 
+    let myPostsElements;
+    debugger;
+    if (!props.profile.posts){
+        
+        myPostsElements=[];
+    } else {
+        myPostsElements = props.profile.posts.map(
+        p => <MyPosts title={p.title} text={p.text} likes={p.likes} dislikes={p.dislikes} />
+        );
+    }
     return (
         <div className={c.Profile}>
             <img src="https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg" className={c.Avatar} />

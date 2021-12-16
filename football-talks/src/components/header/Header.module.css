@@ -19,6 +19,7 @@
 }
 
 .Enter {
+    text-decoration: none;
     font-size: 20px;
     margin-top: 40px;
     text-align: left;
@@ -30,4 +31,9 @@
     margin-top: 40px;
     text-align: left;
     padding: 30px;
+}
+
+.Header a {
+    text-decoration: none;
+    color: silver;
 }

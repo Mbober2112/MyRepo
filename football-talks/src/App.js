@@ -2,6 +2,9 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import c from './App.module.css';
 import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
+import AuthContainer from './components/content/authorization/AuthContainer';
+import Enter from './components/content/authorization/enter/Enter';
+import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
 import Friends from './components/content/friends/Friends';
 import AddPostContainer from './components/content/profile/addPost/AddPostContainer';
@@ -27,6 +30,8 @@ const App = (props) => {
         <Route path="/users" render={() => <UsersContainer />} />
         <Route path="/friends" render={() => <Friends />} />
         <Route path="/settings" render={() => <Settings />} />
+        <Route path="/auth" render={() => <AuthContainer />} />
+        <Route path="/enter" render={() => <EnterContainer />} />
       </div>
       <Footer />
     </div>
