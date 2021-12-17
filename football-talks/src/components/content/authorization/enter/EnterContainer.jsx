@@ -8,7 +8,6 @@ class EnterContainer extends React.Component {
 
     componentDidMount () {  
         axios.get(`http://localhost:8080/auth`, {headers:{login: this.props.login, password: this.props.pass}}).then(response => {    
-            debugger;
             this.props.setUserToken(response.data.token);
         })
     }

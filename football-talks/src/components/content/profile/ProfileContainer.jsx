@@ -12,10 +12,7 @@ class ProfileContainer extends React.Component{
         if (!userId) {
             userId = 'none';
         }
-        axios.get(`http://localhost:8080/user/userpage?id=${userId}`, {headers:{token: this.props.token}}).then(response => {
-            
-            debugger;
-            
+        axios.get(`http://localhost:8080/user/userpage?id=${userId}`, {headers:{token: this.props.token}}).then(response => { 
             this.props.setUserProfile(response.data);
         })
     }

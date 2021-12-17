@@ -4,7 +4,7 @@ import Auth from "./Auth";
 import { onLogin, changeAuthData } from "../../../redux/authReducer";
 
 class AuthContainer extends React.Component {
-
+    
     render () {
         return(
             <Auth login={this.props.login}

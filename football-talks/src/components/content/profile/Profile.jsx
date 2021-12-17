@@ -16,7 +16,7 @@ const Profile = (props) => {
     }
 
     let myPostsElements;
-    debugger;
+    
     if (!props.profile.posts){
         
         myPostsElements=[];

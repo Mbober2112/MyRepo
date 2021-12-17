@@ -10,6 +10,12 @@ const users = {
                 {title: 'Title-2', text: 'text', likes: 14, dislikes: 5 }, 
                 {title: 'Title-3', text: 'text', likes: 3, dislikes: 1 }, 
                 {title: 'Title-4', text: 'text', likes: 11, dislikes: 3 },
+            ],
+            friends: [
+                {id: 3},
+                {id: 5},
+                {id: 7},
+                {id: 12},
             ], token: 'n', },
             { id: 2, name: "Oleg", followed: false, club: 'ЦСКА Москва', postsCounter: 0, raiting: 0, pass: '222', token: 'n', },
             { id: 3, name: "Olga", followed: true, club: 'Локомотив Москва', postsCounter: 0, raiting: 0, pass: '333', token: 'n', },
@@ -48,11 +54,19 @@ app.get('/user', (req, res, next) => {
     const totalCount = users[req.query.id].totalCount;
     const count = Number(req.query.count);
     const page = Number(req.query.page);
+    let token = req.headers.token;
     
     const response = {
         usersSend: [],
         totalCount,
+        currentUser: {},
     };
+
+    for (let i = 0; i<users[1].totalUsers.length; i++) {
+        if (token === users[1].totalUsers[i].token) {
+            response.currentUser = users[1].totalUsers[i];
+        }
+    }
 
     const pageCounter = count*(page-1);
     const length = pageCounter + count;
@@ -115,6 +129,37 @@ app.post('/user', (req, res, next) => {
     }
     users[id] = user;
     res.sendStatus(200);
+});
+
+app.post ('/follow', (req, res, next) => {
+    let friend = req.body;
+    let user;
+    let token = req.headers.token;
+        for (let i = 0; i<users[1].totalUsers.length; i++) {
+            if (token === users[1].totalUsers[i].token) {
+                user = users[1].totalUsers[i];
+            }
+        }
+    user.friends.push(friend);        
+    res.send({result: 'ok'});
+});
+
+app.delete ('/follow', (req, res, next) => {
+    let friend = Number(req.headers.id);
+    let user;
+    let token = req.headers.token;
+        for (let i = 0; i<users[1].totalUsers.length; i++) {
+            if (token === users[1].totalUsers[i].token) {
+                user = users[1].totalUsers[i];
+            }
+        }
+    for (let i =0; i<user.friends.length; i++){
+        if (user.friends[i].id === friend) {
+            user.friends.splice(i,1);
+        }
+    }    
+    // user.friends.push(friend);        
+    res.send({result: 'ok'});
 });
 
 app.listen(8080, () => {console.log('started')} );
