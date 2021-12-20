@@ -73,13 +73,3 @@ const Users = (props) => {
 }
 
 export default Users;
-
-// for (let i=0; i<props.friends.length; i++){
-//     if (au.id === friends[i].id) {
-//         return true;
-//     } else {
-//         return false;
-//     }
-// }
-
-// au.followed

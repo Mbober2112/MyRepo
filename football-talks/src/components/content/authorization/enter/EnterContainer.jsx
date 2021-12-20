@@ -3,12 +3,13 @@ import Enter from "./Enter";
 import { setUserToken } from "../../../../redux/authReducer";
 import * as axios from 'axios';
 import { connect } from 'react-redux';
+import { EnterApi } from "../../../../api/api";
 
 class EnterContainer extends React.Component {
 
     componentDidMount () {  
-        axios.get(`http://localhost:8080/auth`, {headers:{login: this.props.login, password: this.props.pass}}).then(response => {    
-            this.props.setUserToken(response.data.token);
+        EnterApi.enter(this.props.login, this.props.pass).then(token => {    
+            this.props.setUserToken(token);
         })
     }
 

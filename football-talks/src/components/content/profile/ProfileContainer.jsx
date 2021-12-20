@@ -4,6 +4,7 @@ import React from 'react';
 import { setUserProfile } from '../../../redux/profileReducer';
 import * as axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import { ProfileApi } from '../../../api/api';
 
 class ProfileContainer extends React.Component{
 
@@ -12,8 +13,8 @@ class ProfileContainer extends React.Component{
         if (!userId) {
             userId = 'none';
         }
-        axios.get(`http://localhost:8080/user/userpage?id=${userId}`, {headers:{token: this.props.token}}).then(response => { 
-            this.props.setUserProfile(response.data);
+        ProfileApi.getProfile(userId, this.props.token).then(data => { 
+            this.props.setUserProfile(data);
         })
     }
 

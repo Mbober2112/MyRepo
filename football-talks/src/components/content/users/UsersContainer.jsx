@@ -3,25 +3,24 @@ import { follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, setFrie
 import Users from "./Users";
 import * as axios from 'axios';
 import React from "react";
+import { UsersApi } from "../../../api/api";
 
 
 class UsersContainer extends React.Component {
     
-    componentDidMount () {    
-        axios.get(`http://localhost:8080/user?id=1&count=${this.props.pageSize}&page=${this.props.currentPage}`, 
-        {headers:{token: this.props.token}}).then(response => {
-            this.props.setUsers(response.data.usersSend);
-            this.props.setTotalUsersCount(response.data.totalCount);
-            this.props.setFriend(response.data.currentUser.friends);
-        })
+    componentDidMount () {   
+        UsersApi.getUsers(this.props.pageSize, this.props.currentPage, this.props.token).then(data => {
+            this.props.setUsers(data.usersSend);
+            this.props.setTotalUsersCount(data.totalCount);
+            this.props.setFriend(data.currentUser.friends);
+        });
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        axios.get(`http://localhost:8080/user?id=1&count=${this.props.pageSize}&page=${pageNumber}`, 
-        {headers:{token: this.props.token}}).then(response => {
-            this.props.setUsers(response.data.usersSend);
-        })
+        UsersApi.getUsers2(this.props.pageSize, pageNumber, this.props.token).then(data => {
+            this.props.setUsers(data.usersSend);
+        });
     }
 
     render() {
