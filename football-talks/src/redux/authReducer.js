@@ -1,3 +1,5 @@
+import { EnterApi } from "../api/api";
+
 const LOGIN = 'LOGIN';
 const CHANGE_AUTH_DATA = 'CHANGE-AUTH-DATA';
 const SET_USER_TOKEN = 'SET-USER-TOKEN';
@@ -38,5 +40,13 @@ const AuthReducer = (state = initialState, action) => {
 export const onLogin = () => ({ type: LOGIN });
 export const changeAuthData = (login, pass) => ({ type: CHANGE_AUTH_DATA, login: login, pass: pass });
 export const setUserToken = (token) => ({ type: SET_USER_TOKEN, token: token });
+
+export const loginTC = (login, pass) => {
+    return (dispatch) => {
+        EnterApi.enter(login, pass).then(token => {    
+            dispatch(setUserToken(token));
+        });
+    }
+}
 
 export default AuthReducer;

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import c from'./Header.module.css';
 
-const Header = () => {
+const Header = (props) => {
     return (
         <div className={c.Header}>
             <img src="https://na-oboi.ru/images/product_images/info_images/futbolnyj_myach_art_249TR.png" />

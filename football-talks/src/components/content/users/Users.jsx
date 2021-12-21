@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
 import c from './Users.module.css';
-import * as axios from 'axios';
-
 
 const Users = (props) => {
 
@@ -43,25 +41,8 @@ const Users = (props) => {
                             </div>
                         </div>
                         {follow
-                            ? <button onClick={() => {
-                                axios.delete(`http://localhost:8080/follow`, { headers: { token: props.token, id: au.id }},
-                                    ).then(response => {
-                                        if (response.data.result === 'ok'){
-                                            props.unfollow(au.id);
-                                        }
-                                        // console.table(Object.values(props.friends))
-                                        
-                                    })             
-                            }}>Отписаться</button>
-                            : <button onClick={() =>{
-                                axios.post(`http://localhost:8080/follow`, {id: au.id},
-                                    { headers: { token: props.token } }).then(response => {
-                                        if (response.data.result === 'ok'){
-                                            props.follow(au.id);
-                                        }
-                                        // console.table(Object.values(props.friends))
-                                    })
-                                }}>Подписаться</button>}<hr />
+                            ? <button onClick={() => {props.unfollowTC(props.token, au.id)}}>Отписаться</button>
+                            : <button onClick={() =>{props.followTC(props.token, au.id)}}>Подписаться</button>}<hr />
                     </div>
                 })
             }

@@ -1,26 +1,17 @@
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setTotalUsersCount, setUsers, unfollow, setFriend } from "../../../redux/usersReducer";
+import { followTC, setCurrentPage, unfollowTC, getUsers } from "../../../redux/usersReducer";
 import Users from "./Users";
-import * as axios from 'axios';
 import React from "react";
-import { UsersApi } from "../../../api/api";
-
 
 class UsersContainer extends React.Component {
     
     componentDidMount () {   
-        UsersApi.getUsers(this.props.pageSize, this.props.currentPage, this.props.token).then(data => {
-            this.props.setUsers(data.usersSend);
-            this.props.setTotalUsersCount(data.totalCount);
-            this.props.setFriend(data.currentUser.friends);
-        });
+        this.props.getUsers(this.props.pageSize, this.props.currentPage, this.props.token);
     }
 
     onPageChanged = (pageNumber) => {
         this.props.setCurrentPage(pageNumber);
-        UsersApi.getUsers2(this.props.pageSize, pageNumber, this.props.token).then(data => {
-            this.props.setUsers(data.usersSend);
-        });
+        this.props.getUsers(this.props.pageSize, pageNumber, this.props.token);
     }
 
     render() {
@@ -28,8 +19,8 @@ class UsersContainer extends React.Component {
             totalUsersCount = {this.props.totalUsersCount}
             pageSize = {this.props.pageSize}
             allUsers = {this.props.allUsers}
-            unfollow = {this.props.unfollow}
-            follow = {this.props.follow}
+            unfollowTC = {this.props.unfollowTC}
+            followTC = {this.props.followTC}
             currentPage = {this.props.currentPage}
             onPageChanged = {this.onPageChanged}
             friends = {this.props.friends}
@@ -48,4 +39,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {follow, unfollow, setUsers, setCurrentPage, setTotalUsersCount, setFriend}) (UsersContainer);
+export default connect(mapStateToProps, {followTC, unfollowTC, setCurrentPage, getUsers}) (UsersContainer);

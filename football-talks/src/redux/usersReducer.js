@@ -1,3 +1,5 @@
+import { UsersApi } from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -6,12 +8,7 @@ const SET_TOTAL_USERS_COUNT = 'SET-TOTAL-USERS-COUNT';
 const SET_FRIEND = 'SET-FRIEND';
 
 let initialState = {
-    allUsers: [
-        // { id: 1, name: "Pavel", followed: true, club: 'Спартак Москва', postsCounter: 0, raiting: 0, },
-        // { id: 2, name: "Petr", followed: false, club: 'ЦСКА Москва', postsCounter: 0, raiting: 0, },
-        // { id: 3, name: "Dima", followed: true, club: 'Локомотив Москва', postsCounter: 0, raiting: 0, },
-        // { id: 4, name: "Anton", followed: false, club: 'Динамо Москва', postsCounter: 0, raiting: 0, },
-    ],
+    allUsers: [],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1, 
@@ -61,5 +58,35 @@ export const setUsers = (users) => ({ type: SET_USERS, users: users, });
 export const setCurrentPage = (pageNumber) => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber, });
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
 export const setFriend = (friend) => ({ type: SET_FRIEND, friend: friend, });
+
+export const getUsers = (pageSize, currentPage, token) => {
+    return (dispatch) => {
+        UsersApi.getUsers(pageSize, currentPage, token).then(data => {
+            dispatch(setUsers(data.usersSend));
+            dispatch(setTotalUsersCount(data.totalCount));
+            dispatch(setFriend(data.currentUser.friends));
+        });
+    }
+}
+
+export const followTC = (token, id) => {
+    return (dispatch) => {
+        UsersApi.followUser(token, id).then(result => {
+            if (result === 'ok'){
+                dispatch(follow(id));
+            }
+        });
+    }
+}
+
+export const unfollowTC = (token, id) => {
+    return (dispatch) => {
+        UsersApi.unfollowUser(token, id).then(result => {
+            if (result === 'ok'){
+                dispatch(unfollow(id));
+            }  
+        });
+    }
+}
 
 export default UsersReducer;
