@@ -2,7 +2,7 @@ import Profile from './Profile';
 import { connect } from 'react-redux';
 import React from 'react';
 import { setProfile } from '../../../redux/profileReducer';
-import { withRouter } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 class ProfileContainer extends React.Component{
 
@@ -15,6 +15,7 @@ class ProfileContainer extends React.Component{
     }
 
     render () {
+        if (this.props.token === '') return <Redirect to='/auth' />
         return(
             <Profile myPostsData={this.props.myPostsData} profile={this.props.profile}/>
         )

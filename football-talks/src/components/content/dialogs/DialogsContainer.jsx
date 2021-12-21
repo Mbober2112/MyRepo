@@ -4,8 +4,10 @@ import { changeNewMessage, sendMessage } from '../../../redux/dialogsReducer';
 import Dialogs from './Dialogs';
 
 const mapStateToProps = (state) => {
+
     return {
         dialogsPage: state.dialogsPage,
+        token: state.auth.token,
     }
 }
 

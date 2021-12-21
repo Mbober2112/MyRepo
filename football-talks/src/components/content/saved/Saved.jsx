@@ -1,3 +1,4 @@
+import { Redirect } from 'react-router-dom';
 import c from './Saved.module.css';
 import SavedPost from './savedPost/SavedPost';
 
@@ -12,6 +13,8 @@ const Saved = (props) => {
             }
         }
     );
+
+    if(props.token === '') return <Redirect to='/auth' />
 
     return (
         <div className={c.Saved}>

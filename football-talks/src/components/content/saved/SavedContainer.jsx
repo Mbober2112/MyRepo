@@ -4,6 +4,7 @@ import Saved from "./Saved";
 const mapStateToProps = (state) => {
     return {
         allPostsData: state.addPostState.allPostsPage.allPostsData,
+        token: state.auth.token,
     }
 }
 
