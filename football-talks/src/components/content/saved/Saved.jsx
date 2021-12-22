@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router-dom';
 import c from './Saved.module.css';
 import SavedPost from './savedPost/SavedPost';
 
