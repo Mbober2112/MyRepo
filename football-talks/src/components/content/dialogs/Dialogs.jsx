@@ -21,8 +21,6 @@ const Dialogs = (props) => {
         props.changeNewMessage(message);
     }
 
-    if(props.token === '') return <Redirect to='/auth' />
-
     return (
         <div className={c.Dialogs}>
             <div className={c.Users}>

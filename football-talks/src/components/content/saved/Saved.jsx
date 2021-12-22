@@ -14,8 +14,6 @@ const Saved = (props) => {
         }
     );
 
-    if(props.token === '') return <Redirect to='/auth' />
-
     return (
         <div className={c.Saved}>
             {savedPostsElements}

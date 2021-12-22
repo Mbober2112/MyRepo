@@ -1,10 +1,13 @@
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
 import Saved from "./Saved";
+
+let authRedirectComponent = withAuthRedirect(Saved);
 
 const mapStateToProps = (state) => {
     return {
         allPostsData: state.addPostState.allPostsPage.allPostsData,
-        token: state.auth.token,
     }
 }
 
@@ -14,6 +17,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-const SavedContainer = connect(mapStateToProps, mapDispatchToProps) (Saved);
+const SavedContainer = connect(mapStateToProps, mapDispatchToProps) (authRedirectComponent);
 
 export default SavedContainer;
