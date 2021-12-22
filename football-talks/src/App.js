@@ -3,7 +3,6 @@ import { Route } from 'react-router-dom';
 import c from './App.module.css';
 import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
 import AuthContainer from './components/content/authorization/AuthContainer';
-import Enter from './components/content/authorization/enter/Enter';
 import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
 import Friends from './components/content/friends/Friends';
