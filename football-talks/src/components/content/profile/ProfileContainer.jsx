@@ -1,7 +1,7 @@
 import Profile from './Profile';
 import { connect } from 'react-redux';
 import React from 'react';
-import { setProfile } from '../../../redux/profileReducer';
+import { setProfile, setStatus } from '../../../redux/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import { compose } from 'redux';
@@ -18,7 +18,10 @@ class ProfileContainer extends React.Component{
 
     render () {
         return(
-            <Profile myPostsData={this.props.myPostsData} profile={this.props.profile}/>
+            <Profile myPostsData={this.props.myPostsData} 
+            profile={this.props.profile} 
+            setStatus={this.props.setStatus} 
+            token={this.props.token}/>
         )
     }
 }
@@ -31,6 +34,6 @@ const mapStateToProps = (state) => {
 }
 
 export default compose (
-    connect(mapStateToProps, {setProfile}),
+    connect(mapStateToProps, {setProfile, setStatus}),
     withRouter,
     withAuthRedirect,) (ProfileContainer);

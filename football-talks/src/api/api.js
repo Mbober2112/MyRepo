@@ -36,6 +36,13 @@ export const ProfileApi = {
             return response.data;
         });
     },
+    changeStatus(token, status) {
+        
+        return axios.put(`http://localhost:8080/status`, {status: status}, { headers: { token: token } }).then(response => {
+            return response.data;
+            // console.log(response.data);
+        });
+    },
 }
 
 export const EnterApi = {

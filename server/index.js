@@ -4,7 +4,8 @@ const cors = require('cors');
 const users = {
     '1': {
         totalUsers: [
-            { id: 1, name: "Bob", followed: true, club: 'Спартак Москва', postsCounter: 0, raiting: 0, pass: '111', 
+            { id: 1, name: "Bob", followed: true, club: 'Спартак Москва', postsCounter: 0, raiting: 0, pass: '111',
+            status: 'first', 
             posts: [
                 {title: 'Title-1', text: 'text', likes: 12, dislikes: 3 }, 
                 {title: 'Title-2', text: 'text', likes: 14, dislikes: 5 }, 
@@ -18,17 +19,28 @@ const users = {
                 {id: 12},
             ], token: 'n', },
             { id: 2, name: "Oleg", followed: false, club: 'ЦСКА Москва', postsCounter: 0, raiting: 0, pass: '222',
+            status: 'second',
             friends: [], token: 'n', },
-            { id: 3, name: "Olga", followed: true, club: 'Локомотив Москва', postsCounter: 0, raiting: 0, pass: '333', token: 'n', },
-            { id: 4, name: "Ilya", followed: false, club: 'Динамо Москва', postsCounter: 0, raiting: 0, pass: '444', token: 'n', },
-            { id: 5, name: "Igor", followed: true, club: 'Зенит', postsCounter: 0, raiting: 0, pass: '555', token: 'n', },
-            { id: 6, name: "Petr", followed: false, club: 'Краснодар', postsCounter: 0, raiting: 0, pass: '666', token: 'n', },
-            { id: 7, name: "Valera", followed: true, club: 'Ростов', postsCounter: 0, raiting: 0, pass: '777', token: 'n', },
-            { id: 8, name: "Alexandr", followed: false, club: 'Нижний Новгород', postsCounter: 0, raiting: 0, pass: '888', token: 'n', },
-            { id: 9, name: "Ramzan", followed: true, club: 'Ахмат', postsCounter: 0, raiting: 0, pass: '999', token: 'n', },
-            { id: 10, name: "Victor", followed: false, club: 'Крылья Советов', postsCounter: 0, raiting: 0, pass: '10', token: 'n', },
-            { id: 11, name: "Ravshan", followed: true, club: 'Сочи', postsCounter: 0, raiting: 0, pass: '11', token: 'n', },
-            { id: 12, name: "Sergey", followed: false, club: 'Химки', postsCounter: 0, raiting: 0, pass: '12', token: 'n', },
+            { id: 3, name: "Olga", followed: true, club: 'Локомотив Москва', postsCounter: 0, raiting: 0, pass: '333',
+            status: 'third', token: 'n', },
+            { id: 4, name: "Ilya", followed: false, club: 'Динамо Москва', postsCounter: 0, raiting: 0, pass: '444',
+            status: '4', token: 'n', },
+            { id: 5, name: "Igor", followed: true, club: 'Зенит', postsCounter: 0, raiting: 0, pass: '555',
+            status: '5', token: 'n', },
+            { id: 6, name: "Petr", followed: false, club: 'Краснодар', postsCounter: 0, raiting: 0, pass: '666',
+            status: '6', token: 'n', },
+            { id: 7, name: "Valera", followed: true, club: 'Ростов', postsCounter: 0, raiting: 0, pass: '777',
+            status: '7', token: 'n', },
+            { id: 8, name: "Alexandr", followed: false, club: 'Нижний Новгород', postsCounter: 0, raiting: 0, pass: '888',
+            status: '8', token: 'n', },
+            { id: 9, name: "Ramzan", followed: true, club: 'Ахмат', postsCounter: 0, raiting: 0, pass: '999',
+            status: '9', token: 'n', },
+            { id: 10, name: "Victor", followed: false, club: 'Крылья Советов', postsCounter: 0, raiting: 0, pass: '10',
+            status: '10', token: 'n', },
+            { id: 11, name: "Ravshan", followed: true, club: 'Сочи', postsCounter: 0, raiting: 0, pass: '11',
+            status: '11', token: 'n', },
+            { id: 12, name: "Sergey", followed: false, club: 'Химки', postsCounter: 0, raiting: 0, pass: '12',
+            status: '12', token: 'n', },
         ],
         totalCount: 12,
     }
@@ -161,6 +173,19 @@ app.delete ('/follow', (req, res, next) => {
     }    
     // user.friends.push(friend);        
     res.send({result: 'ok'});
+});
+
+app.put ('/status', (req, res, next) => {
+    let status = req.body.status;
+    let user;
+    let token = req.headers.token;
+        for (let i = 0; i<users[1].totalUsers.length; i++) {
+            if (token === users[1].totalUsers[i].token) {
+                user = users[1].totalUsers[i];
+            }
+        }
+    user.status = status;        
+    res.send(status);
 });
 
 app.listen(8080, () => {console.log('started')} );
