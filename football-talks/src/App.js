@@ -2,6 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import c from './App.module.css';
 import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
+import Auth from './components/content/authorization/Auth';
 import AuthContainer from './components/content/authorization/AuthContainer';
 import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
@@ -13,12 +14,13 @@ import Settings from './components/content/settings/Settings';
 import UsersContainer from './components/content/users/UsersContainer';
 import Footer from './components/footer/Footer.jsx';
 import Header from './components/header/Header.jsx';
+import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar.jsx';
 
 const App = (props) => {
   return (
     <div className={c.App}>
-      <Header />
+      <HeaderContainer />
       <div className={c.Page}>
         <Navbar />
         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />

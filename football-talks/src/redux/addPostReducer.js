@@ -1,5 +1,8 @@
+import { actionTypes } from "redux-form";
+
 const ADD_POST = 'ADD-POST';
 const CHANGE_NEW_POST = 'CHANGE-NEW-POST';
+const CHANGE_POST_ADDED = 'CHANGE-POST-ADDED';
 
 let initialState = {
     profilePage: {
@@ -19,6 +22,7 @@ let initialState = {
             { id: 2, username: "Dima", title: "Заголовок 2", text: "Текст", likes: 21, dislikes: 8, saved: false },
             { id: 1, username: "Anton", title: "Заголовок 1", text: "Текст", likes: 16, dislikes: 2, saved: true },
         ],
+        postAdded: false,
     },
 }
 
@@ -36,8 +40,8 @@ const AddPostReducer = (state = initialState, action) => {
             let newAllPost = {
                 id: 5,
                 username: "Username",
-                title: state.profilePage.newPostTitle,
-                text: state.profilePage.newPostText,
+                title: action.title,
+                text: action.text,
                 likes: 0,
                 dislikes: 0,
                 saved: false
@@ -54,16 +58,15 @@ const AddPostReducer = (state = initialState, action) => {
                 allPostsPage: {
                     ...state.allPostsPage,
                     allPostsData: [newAllPost, ...state.allPostsPage.allPostsData],
+                    postAdded: true,
                 },
             }
-
-        case CHANGE_NEW_POST:
+        case CHANGE_POST_ADDED:
             return {
                 ...state,
-                profilePage: {
-                    ...state.profilePage,
-                    newPostTitle: action.newTitle,
-                    newPostText: action.newText,
+                allPostsPage: {
+                    ...state.allPostsPage,
+                    postAdded: false,
                 },
             }
 
@@ -72,7 +75,7 @@ const AddPostReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = () => ({ type: ADD_POST });
-export const changeNewPost = (title, text) => ({ type: CHANGE_NEW_POST, newTitle: title, newText: text });
+export const addPost = (title, text) => ({ type: ADD_POST, title: title, text: text });
+export const postAddedChange = () => ({ type: CHANGE_POST_ADDED, });
 
 export default AddPostReducer;

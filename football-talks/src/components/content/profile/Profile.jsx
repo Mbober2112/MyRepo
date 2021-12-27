@@ -6,6 +6,10 @@ import ProfileStatus from './profileStatus/ProfileStatus';
 
 const Profile = (props) => {
 
+    let changePostAdded = () => {
+        props.postAddedChange();
+    }
+
     let raiting = 0;
 
     for (let i = 0; i<props.myPostsData.length; i++) {
@@ -38,7 +42,7 @@ const Profile = (props) => {
             </div>
             <div className={c.MyPosts}>
                 <h3>Посты пользователя</h3>
-                    <NavLink to="/addpost"><button>Добавить пост</button></NavLink><hr />
+                    <NavLink to="/addpost"><button onClick={changePostAdded}>Добавить пост</button></NavLink><hr />
                 {myPostsElements}
             </div>
         </div>

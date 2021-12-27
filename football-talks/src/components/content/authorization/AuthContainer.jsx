@@ -2,9 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Auth from "./Auth";
 import { onLogin, changeAuthData } from "../../../redux/authReducer";
+import { compose } from "redux";
+import { withEnterRedirect } from "../../../hoc/withEnterRedirect";
 
 class AuthContainer extends React.Component {
-    
+
     render () {
         return(
             <Auth login={this.props.login}
@@ -22,4 +24,8 @@ const mapStateToProps = (state) =>{
     }
 }
 
-export default connect(mapStateToProps, {onLogin, changeAuthData}) (AuthContainer);
+export default compose (
+    connect(mapStateToProps, {onLogin, changeAuthData}),
+    withEnterRedirect,) (AuthContainer);
+
+// export default connect(mapStateToProps, {onLogin, changeAuthData}) (AuthContainer);

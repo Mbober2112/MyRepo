@@ -13,8 +13,7 @@ let initialState = {
         { id: 2, message: "Hi" },
         { id: 3, message: "How are you?" },
         { id: 4, message: "Bye" },
-    ],
-    newMessageText: "",    
+    ],   
 }
 
 const DialogsReducer = (state = initialState, action) => {
@@ -22,27 +21,19 @@ const DialogsReducer = (state = initialState, action) => {
         case SEND_MESSAGE: 
             let newMessage = {
                 id: 5,
-                message: state.newMessageText,
+                message: action.newMessage,
             }
 
             return {
                 ...state,
                 messagesData: [...state.messagesData, newMessage],
-                newMessageText: '',
             }
-        
-        case CHANGE_NEW_MESSAGE: 
-            return {
-                ...state,
-                newMessageText: action.newMessage,
-            };
         
         default:
             return state;
     }
 }
 
-export const sendMessage = () => ({ type: SEND_MESSAGE });
-export const changeNewMessage = (message) => ({ type: CHANGE_NEW_MESSAGE, newMessage: message });
+export const sendMessage = (message) => ({ type: SEND_MESSAGE, newMessage: message });
 
 export default DialogsReducer;
