@@ -12,7 +12,7 @@ const AuthForm = (props) => {
             </div>
             <div className={c.Items}>
                 <span>Пароль: </span>
-                <Field component={'input'} name={'pass'} />
+                <Field component={'input'} name={'pass'} type={'password'}/>
             </div>
             <div className={c.Button}>                
                 <button>Войти</button>                

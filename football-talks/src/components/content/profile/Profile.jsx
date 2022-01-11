@@ -32,6 +32,7 @@ const Profile = (props) => {
     }
     return (
         <div className={c.Profile}>
+            
             <img src="https://trashbox.ru/ifiles/220798_004e6a_img_20140503_122504.jpg_min1/avatarki.-1.jpg" className={c.Avatar} />
             <div className={c.Info}>
                 <h4>{props.profile.name}</h4><hr />
