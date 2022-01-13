@@ -60,32 +60,29 @@ export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_USERS_COUNT,
 export const setFriend = (friend) => ({ type: SET_FRIEND, friend: friend, });
 
 export const getUsers = (pageSize, currentPage, token) => {
-    return (dispatch) => {
-        UsersApi.getUsers(pageSize, currentPage, token).then(data => {
+    return async (dispatch) => {
+        let data = await UsersApi.getUsers(pageSize, currentPage, token);
             dispatch(setUsers(data.usersSend));
             dispatch(setTotalUsersCount(data.totalCount));
             dispatch(setFriend(data.currentUser.friends));
-        });
     }
 }
 
 export const followTC = (token, id) => {
-    return (dispatch) => {
-        UsersApi.followUser(token, id).then(result => {
+    return async (dispatch) => {
+        let result = await UsersApi.followUser(token, id);
             if (result === 'ok'){
                 dispatch(follow(id));
             }
-        });
     }
 }
 
 export const unfollowTC = (token, id) => {
-    return (dispatch) => {
-        UsersApi.unfollowUser(token, id).then(result => {
+    return async (dispatch) => {
+        let result = await UsersApi.unfollowUser(token, id);
             if (result === 'ok'){
                 dispatch(unfollow(id));
-            }  
-        });
+            } 
     }
 }
 

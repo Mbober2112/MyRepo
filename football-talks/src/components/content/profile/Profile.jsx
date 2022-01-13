@@ -2,7 +2,6 @@ import c from './Profile.module.css';
 import React from 'react';
 import MyPosts from './myPosts/MyPosts';
 import { NavLink } from 'react-router-dom';
-import ProfileStatus from './profileStatus/ProfileStatus';
 import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks';
 
 const Profile = (props) => {

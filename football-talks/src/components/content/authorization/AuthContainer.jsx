@@ -4,7 +4,6 @@ import Auth from "./Auth";
 import { onLogin, changeAuthData, loginTC } from "../../../redux/authReducer";
 import { compose } from "redux";
 import { withEnterRedirect } from "../../../hoc/withEnterRedirect";
-import { withProfileRedirect } from "../../../hoc/withProfileRedirect";
 
 class AuthContainer extends React.Component {
 

@@ -1,4 +1,3 @@
-import { NavLink } from 'react-router-dom';
 import c from './Auth.module.css';
 import React from 'react';
 import { reduxForm, Field } from 'redux-form';

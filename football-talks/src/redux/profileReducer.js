@@ -28,18 +28,16 @@ export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile: p
 export const setUserProfileStatus = (status) => ({ type: SET_USER_PROFILE_STATUS, status: status });
 
 export const setProfile = (userId, token) => {
-    return (dispatch) => {
-        ProfileApi.getProfile(userId, token).then(data => {
+    return async (dispatch) => {
+        let data = await ProfileApi.getProfile(userId, token);
             dispatch(setUserProfile(data));
-        });
     }
 }
 
 export const setStatus = (token, status) => {
-    return (dispatch) => {
-        ProfileApi.changeStatus(token, status).then(data => {
+    return async (dispatch) => {
+        let data = await ProfileApi.changeStatus(token, status);
             dispatch(setUserProfileStatus(data));
-        });
     }
 }
 

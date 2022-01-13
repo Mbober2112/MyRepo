@@ -5,7 +5,6 @@ import { Route } from 'react-router-dom';
 import { compose } from 'redux';
 import c from './App.module.css';
 import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
-import Auth from './components/content/authorization/Auth';
 import AuthContainer from './components/content/authorization/AuthContainer';
 import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
@@ -13,11 +12,9 @@ import Friends from './components/content/friends/Friends';
 import AddPostContainer from './components/content/profile/addPost/AddPostContainer';
 import ProfileContainer from './components/content/profile/ProfileContainer';
 import SavedContainer from './components/content/saved/SavedContainer';
-import Settings from './components/content/settings/Settings';
 import SettingsContainer from './components/content/settings/SettingsContainer';
 import UsersContainer from './components/content/users/UsersContainer';
 import Footer from './components/footer/Footer.jsx';
-import Header from './components/header/Header.jsx';
 import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar.jsx';
 
@@ -49,7 +46,7 @@ export default compose (
   connect(null, {}),
   withRouter,) (App);
 
-  
+
 // }= (props) => {
 //   return (
 //     <div className={c.App}>

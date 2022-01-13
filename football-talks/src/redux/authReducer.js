@@ -42,10 +42,9 @@ export const changeAuthData = (login, pass) => ({ type: CHANGE_AUTH_DATA, login:
 export const setUserToken = (token) => ({ type: SET_USER_TOKEN, token: token });
 
 export const loginTC = (login, pass) => {
-    return (dispatch) => {
-        EnterApi.enter(login, pass).then(token => {    
+    return async (dispatch) => {
+        let token = await EnterApi.enter(login, pass);   
             dispatch(setUserToken(token));
-        });
     }
 }
 
