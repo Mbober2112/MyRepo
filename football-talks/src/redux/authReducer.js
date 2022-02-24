@@ -1,8 +1,8 @@
 import { EnterApi } from "../api/api";
 
-const LOGIN = 'LOGIN';
-const CHANGE_AUTH_DATA = 'CHANGE-AUTH-DATA';
-const SET_USER_TOKEN = 'SET-USER-TOKEN';
+const LOGIN = 'auth/LOGIN';
+const CHANGE_AUTH_DATA = 'auth/CHANGE-AUTH-DATA';
+const SET_USER_TOKEN = 'auth/SET-USER-TOKEN';
 
 let initialState = {
     login: '',

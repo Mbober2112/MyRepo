@@ -52,3 +52,12 @@ export const EnterApi = {
         })
     }
 }
+
+export const AddPostApi = {
+    addPostToServer(token, title, text) {
+        return axios.post(`http://localhost:8080/addpost`, {title: title, text: text, likes: 0, dislikes: 0 },
+            { headers: { token: token } }).then(response => {
+                return response.data.result;
+            })
+    },
+}

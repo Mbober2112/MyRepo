@@ -23,13 +23,13 @@ const Profile = (props) => {
     let myPostsElements;
     
     if (!props.profile.posts){
-        
         myPostsElements=[];
     } else {
         myPostsElements = props.profile.posts.map(
         p => <MyPosts title={p.title} text={p.text} likes={p.likes} dislikes={p.dislikes} />
         );
     }
+    
     return (
         <div className={c.Profile}>
             
@@ -43,7 +43,11 @@ const Profile = (props) => {
             </div>
             <div className={c.MyPosts}>
                 <h3>Посты пользователя</h3>
-                    <NavLink to="/addpost"><button onClick={changePostAdded}>Добавить пост</button></NavLink><hr />
+                {(props.profile.token === props.token) && <div>
+                    <NavLink to="/addpost"><button onClick={changePostAdded}>Добавить пост</button></NavLink>
+                </div>
+                }
+                <hr />   
                 {myPostsElements}
             </div>
         </div>

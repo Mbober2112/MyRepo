@@ -8,15 +8,21 @@ import AllPostsContainer from './components/content/allPosts/AllPostsContainer';
 import AuthContainer from './components/content/authorization/AuthContainer';
 import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
-import Friends from './components/content/friends/Friends';
-import AddPostContainer from './components/content/profile/addPost/AddPostContainer';
+//import Friends from './components/content/friends/Friends';
+//import AddPostContainer from './components/content/profile/addPost/AddPostContainer';
 import ProfileContainer from './components/content/profile/ProfileContainer';
-import SavedContainer from './components/content/saved/SavedContainer';
-import SettingsContainer from './components/content/settings/SettingsContainer';
-import UsersContainer from './components/content/users/UsersContainer';
+//import SavedContainer from './components/content/saved/SavedContainer';
+//import SettingsContainer from './components/content/settings/SettingsContainer';
+//import UsersContainer from './components/content/users/UsersContainer';
 import Footer from './components/footer/Footer.jsx';
 import HeaderContainer from './components/header/HeaderContainer';
 import Navbar from './components/navbar/Navbar.jsx';
+
+const SavedContainer = React.lazy(() => import('./components/content/saved/SavedContainer'));
+const AddPostContainer = React.lazy(() => import('./components/content/profile/addPost/AddPostContainer'));
+const UsersContainer = React.lazy(() => import('./components/content/users/UsersContainer'));
+const Friends = React.lazy(() => import('./components/content/friends/Friends'));
+const SettingsContainer = React.lazy(() => import('./components/content/settings/SettingsContainer'));
 
 class App extends React.Component {
   render () {
@@ -28,11 +34,13 @@ class App extends React.Component {
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
           <Route path="/dialogs" render={() => <DialogsContainer />} />
           <Route path="/allposts" render={() => <AllPostsContainer />} />
-          <Route path="/saved" render={() => <SavedContainer />} />
-          <Route path="/addPost" render={() => <AddPostContainer/>} />
-          <Route path="/users" render={() => <UsersContainer />} />
-          <Route path="/friends" render={() => <Friends />} />
-          <Route path="/settings" render={() => <SettingsContainer />} />
+          <React.Suspense fallback={<div>Loading...</div>}>
+            <Route path="/saved" render={() => <SavedContainer />} />
+            <Route path="/addPost" render={() => <AddPostContainer/>} />
+            <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/friends" render={() => <Friends />} />
+            <Route path="/settings" render={() => <SettingsContainer />} />
+          </React.Suspense>
           <Route path="/auth" render={() => <AuthContainer />} />
           <Route path="/enter" render={() => <EnterContainer />} />
         </div>

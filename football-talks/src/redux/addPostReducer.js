@@ -1,8 +1,9 @@
 import { actionTypes } from "redux-form";
+import { AddPostApi } from "../api/api";
 
-const ADD_POST = 'ADD-POST';
-const CHANGE_NEW_POST = 'CHANGE-NEW-POST';
-const CHANGE_POST_ADDED = 'CHANGE-POST-ADDED';
+const ADD_POST = 'addPost/ADD-POST';
+const CHANGE_NEW_POST = 'addPost/CHANGE-NEW-POST';
+const CHANGE_POST_ADDED = 'addPost/CHANGE-POST-ADDED';
 
 let initialState = {
     profilePage: {

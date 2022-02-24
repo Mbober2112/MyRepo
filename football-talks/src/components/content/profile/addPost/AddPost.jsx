@@ -1,5 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import c from './AddPost.module.css';
 import { reduxForm, Field } from 'redux-form';
 
@@ -25,6 +24,7 @@ const AddPost = (props) => {
 
     const onSubmit = (formData) => {
         props.addPost(formData.title, formData.text);
+        props.addPostToServer(props.token,formData.title, formData.text);
     }
 
     return (

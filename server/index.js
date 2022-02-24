@@ -157,6 +157,19 @@ app.post ('/follow', (req, res, next) => {
     res.send({result: 'ok'});
 });
 
+app.post ('/addpost', (req, res, next) => {
+    let newPost = req.body;
+    let user;
+    let token = req.headers.token;
+        for (let i = 0; i<users[1].totalUsers.length; i++) {
+            if (token === users[1].totalUsers[i].token) {
+                user = users[1].totalUsers[i];
+            }
+        }
+    user.posts.unshift(newPost);        
+    res.send({result: 'ok'});
+});
+
 app.delete ('/follow', (req, res, next) => {
     let friend = Number(req.headers.id);
     let user;
