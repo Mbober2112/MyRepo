@@ -1,9 +1,38 @@
-import { actionTypes } from "redux-form";
+// import { actionTypes } from "redux-form";
 import { AddPostApi } from "../api/api";
 
 const ADD_POST = 'addPost/ADD-POST';
 const CHANGE_NEW_POST = 'addPost/CHANGE-NEW-POST';
 const CHANGE_POST_ADDED = 'addPost/CHANGE-POST-ADDED';
+
+type MyPostType = {
+    id: number,
+    title: string,
+    text: string,
+    likes: number,
+    dislikes: number,
+}
+
+type AllPostType = {
+    id: number,
+    username: string,
+    title: string,
+    text: string,
+    likes: number,
+    dislikes: number,
+    saved: boolean,
+}
+
+type ProfilePageType = {
+    myPostsData: Array<MyPostType>,
+    newPostTitle: string,
+    newPostText: string,
+}
+
+type AllPostsPageType = {
+    allPostsData: Array<AllPostType>,
+    postAdded: boolean,
+}
 
 let initialState = {
     profilePage: {
@@ -15,7 +44,7 @@ let initialState = {
         ],
         newPostTitle: "",
         newPostText: "",
-    },
+    } as ProfilePageType,
     allPostsPage: {
         allPostsData: [
             { id: 4, username: "Pavel", title: "Заголовок 4", text: "Текст", likes: 12, dislikes: 3, saved: true },
@@ -24,10 +53,11 @@ let initialState = {
             { id: 1, username: "Anton", title: "Заголовок 1", text: "Текст", likes: 16, dislikes: 2, saved: true },
         ],
         postAdded: false,
-    },
+    } as AllPostsPageType,
 }
+export type InitialStateType = typeof initialState;
 
-const AddPostReducer = (state = initialState, action) => {
+const AddPostReducer = (state = initialState, action: any): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -35,7 +65,7 @@ const AddPostReducer = (state = initialState, action) => {
                 title: state.profilePage.newPostTitle,
                 text: state.profilePage.newPostText,
                 likes: 0,
-                dislikes: 0
+                dislikes: 0,
             }
 
             let newAllPost = {
@@ -76,7 +106,17 @@ const AddPostReducer = (state = initialState, action) => {
     }
 }
 
-export const addPost = (title, text) => ({ type: ADD_POST, title: title, text: text });
-export const postAddedChange = () => ({ type: CHANGE_POST_ADDED, });
+type AddPostActionType = {
+    type: typeof ADD_POST,
+    title: string,
+    text: string,
+}
+
+type PostAddedChangeActionType = {
+    type: typeof CHANGE_POST_ADDED,
+}
+
+export const addPost = (title: string, text: string): AddPostActionType => ({ type: ADD_POST, title: title, text: text });
+export const postAddedChange = (): PostAddedChangeActionType => ({ type: CHANGE_POST_ADDED, });
 
 export default AddPostReducer;
