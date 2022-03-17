@@ -1,4 +1,6 @@
+import { ThunkAction } from "redux-thunk";
 import { AddPostApi, ProfileApi } from "../api/api";
+import { AppStateType } from "./reduxStore";
 
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_PROFILE_STATUS = 'profile/SET-USER-PROFILE-STATUS';
@@ -32,7 +34,7 @@ let initialState = {
 
 export type InitialStateType = typeof initialState;
 
-const ProfileReducer = (state = initialState, action: any): InitialStateType => {
+const ProfileReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case SET_USER_PROFILE:
             return {
@@ -75,26 +77,30 @@ type AddPostToProfilePageActionType = {
     title: string,
     text: string,
 }
+type ActionsTypes = SetUserProfileActionType | SetUserProfileStatusActionType | AddPostToProfilePageActionType;
+
 export const setUserProfile = (profile: ProfileType): SetUserProfileActionType => ({ type: SET_USER_PROFILE, profile: profile });
 export const setUserProfileStatus = (status: string): SetUserProfileStatusActionType => ({ type: SET_USER_PROFILE_STATUS, status: status });
 export const addPostToProfilePage = (title: string, text: string): AddPostToProfilePageActionType => ({ type: ADD_POST_TO_PROFILE_PAGE, title: title, text: text });
 
-export const setProfile = (userId: number, token: string) => {
-    return async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+
+export const setProfile = (userId: number, token: string): ThunkType => {
+    return async (dispatch) => {
         let data = await ProfileApi.getProfile(userId, token);
         dispatch(setUserProfile(data));
     }
 }
 
-export const setStatus = (token: string, status: string) => {
-    return async (dispatch: any) => {
+export const setStatus = (token: string, status: string): ThunkType => {
+    return async (dispatch) => {
         let data = await ProfileApi.changeStatus(token, status);
         dispatch(setUserProfileStatus(data));
     }
 }
 
-export const addPostToServer = (token: string, title: string, text: string) => {
-    return async (dispatch: any) => {
+export const addPostToServer = (token: string, title: string, text: string): ThunkType => {
+    return async (dispatch) => {
         let result = await AddPostApi.addPostToServer(token, title, text);
         if (result === 'ok') {
             dispatch(addPostToProfilePage(title, text));

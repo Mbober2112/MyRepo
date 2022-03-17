@@ -27,5 +27,4 @@ const mapStateToProps = (state) =>{
 export default compose (
     connect(mapStateToProps, {onLogin, changeAuthData}),
     withEnterRedirect,) (AuthContainer);
-
-// export default connect(mapStateToProps, {onLogin, changeAuthData}) (AuthContainer);
+    

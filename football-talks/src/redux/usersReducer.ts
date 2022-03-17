@@ -1,4 +1,6 @@
+import { ThunkAction } from "redux-thunk";
 import { UsersApi } from "../api/api";
+import { AppStateType } from "./reduxStore";
 
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
@@ -39,7 +41,7 @@ let initialState = {
 
 type InitialStateType = typeof initialState;
 
-const UsersReducer = (state = initialState, action: any): InitialStateType => {
+const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case FOLLOW: 
             return {
@@ -98,18 +100,23 @@ type SetTotalUsersCountActionType = {
 }
 type SetFriendActionType = {
     type: typeof SET_FRIEND,
-    friend: FriendType,
+    friend: Array<FriendType>,
 }
+
+type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType |
+    SetTotalUsersCountActionType | SetFriendActionType;
 
 export const follow = (id: number): FollowActionType => ({ type: FOLLOW, userId: id, });
 export const unfollow = (id: number): UnfollowActionType => ({ type: UNFOLLOW, userId: id, });
 export const setUsers = (users: Array<UserType>): SetUsersActionType => ({ type: SET_USERS, users: users, });
 export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber, });
 export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountActionType => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
-export const setFriend = (friend: FriendType): SetFriendActionType => ({ type: SET_FRIEND, friend: friend, });
+export const setFriend = (friend: Array<FriendType>): SetFriendActionType => ({ type: SET_FRIEND, friend: friend, });
 
-export const getUsers = (pageSize: number, currentPage: number, token: string) => {
-    return async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+
+export const getUsers = (pageSize: number, currentPage: number, token: string): ThunkType => {
+    return async (dispatch, getState) => {
         let data = await UsersApi.getUsers(pageSize, currentPage, token);
             dispatch(setUsers(data.usersSend));
             dispatch(setTotalUsersCount(data.totalCount));
@@ -117,8 +124,8 @@ export const getUsers = (pageSize: number, currentPage: number, token: string) =
     }
 }
 
-export const followTC = (token: string, id: number) => {
-    return async (dispatch: any) => {
+export const followTC = (token: string, id: number) : ThunkType => {
+    return async (dispatch) => {
         let result = await UsersApi.followUser(token, id);
             if (result === 'ok'){
                 dispatch(follow(id));
@@ -126,8 +133,8 @@ export const followTC = (token: string, id: number) => {
     }
 }
 
-export const unfollowTC = (token: string, id: number) => {
-    return async (dispatch: any) => {
+export const unfollowTC = (token: string, id: number): ThunkType => {
+    return async (dispatch) => {
         let result = await UsersApi.unfollowUser(token, id);
             if (result === 'ok'){
                 dispatch(unfollow(id));

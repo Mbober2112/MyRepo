@@ -1,4 +1,6 @@
+import { ThunkAction } from "redux-thunk";
 import { EnterApi } from "../api/api";
+import { AppStateType } from "./reduxStore";
 
 const LOGIN = 'auth/LOGIN';
 const CHANGE_AUTH_DATA = 'auth/CHANGE-AUTH-DATA';
@@ -16,7 +18,7 @@ let initialState: InitialStateType = {
     token: '',
 }
 
-const AuthReducer = (state = initialState, action: any): InitialStateType => {
+const AuthReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case LOGIN:
             return {
@@ -58,12 +60,16 @@ type setUserTokenActionType = {
     token: string,
 }
 
+type ActionsTypes = OnLoginActionType | ChangeAuthDataActionType | setUserTokenActionType;
+
 export const onLogin = (): OnLoginActionType => ({ type: LOGIN });
 export const changeAuthData = (login: string, pass: string): ChangeAuthDataActionType => ({ type: CHANGE_AUTH_DATA, login: login, pass: pass });
 export const setUserToken = (token: string): setUserTokenActionType => ({ type: SET_USER_TOKEN, token: token });
 
-export const loginTC = (login: string, pass: string) => {
-    return async (dispatch: any) => {
+type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
+
+export const loginTC = (login: string, pass: string): ThunkType => {
+    return async (dispatch) => {
         let token = await EnterApi.enter(login, pass);   
             dispatch(setUserToken(token));
     }

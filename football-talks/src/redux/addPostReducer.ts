@@ -57,7 +57,7 @@ let initialState = {
 }
 export type InitialStateType = typeof initialState;
 
-const AddPostReducer = (state = initialState, action: any): InitialStateType => {
+const AddPostReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             let newPost = {
@@ -115,6 +115,7 @@ type AddPostActionType = {
 type PostAddedChangeActionType = {
     type: typeof CHANGE_POST_ADDED,
 }
+type ActionsTypes = AddPostActionType | PostAddedChangeActionType;
 
 export const addPost = (title: string, text: string): AddPostActionType => ({ type: ADD_POST, title: title, text: text });
 export const postAddedChange = (): PostAddedChangeActionType => ({ type: CHANGE_POST_ADDED, });
