@@ -68,7 +68,7 @@ const UsersReducer = (state = initialState, action: ActionsTypes): InitialStateT
             return {...state, currentPage: action.pageNumber};
 
         case SET_FRIEND:
-            return {...state, friends: action.friend};    
+            return {...state, friends: action.friend!};    
         
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalCount};    
@@ -100,7 +100,7 @@ type SetTotalUsersCountActionType = {
 }
 type SetFriendActionType = {
     type: typeof SET_FRIEND,
-    friend: Array<FriendType>,
+    friend: Array<FriendType> | undefined,
 }
 
 type ActionsTypes = FollowActionType | UnfollowActionType | SetUsersActionType | SetCurrentPageActionType |
@@ -111,7 +111,7 @@ export const unfollow = (id: number): UnfollowActionType => ({ type: UNFOLLOW, u
 export const setUsers = (users: Array<UserType>): SetUsersActionType => ({ type: SET_USERS, users: users, });
 export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, pageNumber: pageNumber, });
 export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountActionType => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
-export const setFriend = (friend: Array<FriendType>): SetFriendActionType => ({ type: SET_FRIEND, friend: friend, });
+export const setFriend = (friend: Array<FriendType> | undefined): SetFriendActionType => ({ type: SET_FRIEND, friend: friend, });
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
