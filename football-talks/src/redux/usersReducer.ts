@@ -13,7 +13,7 @@ type PostType = {
     likes: number,
     dislikes: number,
 }
-type UserType = {
+export type UserType = {
     club: string,
     followed: boolean,
     friends?: Array<FriendType>,
@@ -26,7 +26,7 @@ type UserType = {
     status: string,
     token: string,
 }
-type FriendType = {
+export type FriendType = {
     id: number,
 }
 let initialState = {

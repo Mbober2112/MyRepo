@@ -1,7 +1,11 @@
+import { AllPostType } from '../../../redux/addPostReducer';
 import c from './Saved.module.css';
 import SavedPost from './savedPost/SavedPost';
 
-const Saved = (props) => {
+type PropsType = {
+    allPostsData: Array<AllPostType>
+}
+const Saved = (props: PropsType) => {
 
     let savedPostsElements = props.allPostsData.map(
         (ap) => {

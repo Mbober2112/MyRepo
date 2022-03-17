@@ -7,7 +7,7 @@ import UsersReducer from "./usersReducer";
 import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     addPostState: AddPostReducer,
     dialogsPage: DialogsReducer,
     allUsersPage: UsersReducer,
@@ -16,6 +16,10 @@ let reducers = combineReducers({
     form: formReducer,
 });
 
-let store = createStore(reducers, applyMiddleware(thunkMiddleware));
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>;
+
+
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
 
 export default store;

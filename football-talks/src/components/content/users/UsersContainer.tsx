@@ -1,15 +1,34 @@
 import { connect } from "react-redux";
-import { followTC, setCurrentPage, unfollowTC, getUsers } from "../../../redux/usersReducer";
+import { followTC, setCurrentPage, unfollowTC, getUsers, FriendType, UserType } from "../../../redux/usersReducer";
 import Users from "./Users";
 import React from "react";
+import { AppStateType } from "../../../redux/reduxStore";
 
-class UsersContainer extends React.Component {
+type MapDispatchPropsType = {        
+    unfollowTC: (token: string, id: number) => void,
+    followTC: (token: string, id: number) => void,
+    getUsers: (pageSize: number, currentPage: number, toket: string) => void,
+    setCurrentPage: (pageNumber: number) => void,
+}
+
+type MapStatePropsType = {
+    allUsers: Array<UserType>,
+    pageSize: number,
+    totalUsersCount: number,
+    currentPage: number,
+    token: string,
+    friends: Array<FriendType>,    
+}
+
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+class UsersContainer extends React.Component<PropsType> {
     
     componentDidMount () {   
         this.props.getUsers(this.props.pageSize, this.props.currentPage, this.props.token);
     }
 
-    onPageChanged = (pageNumber) => {
+    onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber);
         this.props.getUsers(this.props.pageSize, pageNumber, this.props.token);
     }
@@ -28,7 +47,7 @@ class UsersContainer extends React.Component {
     };
 }
 
-const mapStateToProps = (state) => {
+let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         allUsers: state.allUsersPage.allUsers,
         pageSize: state.allUsersPage.pageSize,
@@ -39,4 +58,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {followTC, unfollowTC, setCurrentPage, getUsers}) (UsersContainer);
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {followTC, unfollowTC, setCurrentPage, getUsers}) (UsersContainer);

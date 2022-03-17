@@ -13,7 +13,7 @@ type MyPostType = {
     dislikes: number,
 }
 
-type AllPostType = {
+export type AllPostType = {
     id: number,
     username: string,
     title: string,

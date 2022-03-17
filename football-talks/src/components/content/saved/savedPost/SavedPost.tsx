@@ -1,6 +1,14 @@
 import c from './SavedPost.module.css';
 
-const SavedPost = (props) => {
+type PropsType = {
+    username: string,
+    title: string,
+    text: string,
+    likes: number,
+    dislikes: number,
+}
+
+const SavedPost = (props: PropsType) => {
     return (
         <div className={c.SavedPost}>
             <img src="https://image.flaticon.com/icons/png/512/108/108186.png" className={c.Avatar}/>

@@ -2,9 +2,13 @@ import Header from "./Header";
 import { changeAuthData } from "../../redux/authReducer";
 import { connect } from "react-redux";
 import React from "react";
+import { AppStateType } from "../../redux/reduxStore";
 
+type MapDispatchPropsType = {
+    changeAuthData: (a: string, b: string) => void,
+}
 
-class HeaderContainer extends React.Component {
+class HeaderContainer extends React.Component<MapDispatchPropsType> {
 
     render() {
         return (
@@ -13,7 +17,7 @@ class HeaderContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppStateType) => {
     return {
 
     }

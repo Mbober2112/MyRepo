@@ -1,12 +1,26 @@
 import { NavLink } from 'react-router-dom';
+import { FriendType, UserType } from '../../../redux/usersReducer';
 import c from './Users.module.css';
 
-const Users = (props) => {
+type PropsType = {
+    totalUsersCount: number,
+    pageSize: number,
+    friends: Array<FriendType>,
+    allUsers: Array<UserType>,
+    token: string,
+    currentPage: number,
+    
+    onPageChanged: (p: number) => void,
+    unfollowTC: (token: string, id: number) => void,
+    followTC: (token: string, id: number) => void,
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+}
+const Users: React.FC<PropsType> = (props) => {
 
-    let pages = [];
-    let follow;
+    let pagesCount: number = Math.ceil(props.totalUsersCount / props.pageSize);
+
+    let pages: Array<number> = [];
+    let follow: boolean;
 
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -47,7 +61,7 @@ const Users = (props) => {
                 })
             }
             <div className={c.Pages}>
-                {pages.map(p => <span className={props.currentPage === p && c.Selected} onClick={() => props.onPageChanged(p)}>{p}</span>)}
+                {pages.map(p => <span className={(props.currentPage === p && c.Selected) as string}  onClick={() => props.onPageChanged(p)}>{p}</span>)}
             </div>
         </div>
     )
