@@ -1,6 +1,13 @@
 import c from './Post.module.css';
 
-const Post = (props) => {
+type PropsType = {
+    username: string,
+    title: string,
+    text: string,
+    likes: number,
+    dislikes: number,
+}
+const Post = (props: PropsType) => {
     return (
         <div className={c.Post}>
             <img src="https://image.flaticon.com/icons/png/512/108/108186.png" className={c.Avatar}/>
