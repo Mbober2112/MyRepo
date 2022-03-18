@@ -5,7 +5,7 @@ const ADD_POST = 'addPost/ADD-POST';
 const CHANGE_NEW_POST = 'addPost/CHANGE-NEW-POST';
 const CHANGE_POST_ADDED = 'addPost/CHANGE-POST-ADDED';
 
-type MyPostType = {
+export type MyPostType = {
     id: number,
     title: string,
     text: string,

@@ -1,3 +1,4 @@
+import React from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../../hoc/withAuthRedirect";
@@ -14,7 +15,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     }
 }
 
-export default compose (
+export default compose<React.ComponentType> (
     connect(mapStateToProps, {}),
     withAuthRedirect,) (Saved);
 

@@ -1,6 +1,12 @@
 import c from './MyPosts.module.css';
 
-const MyPosts = (props) => {
+type PropsType = {
+    title: string,
+    text: string,
+    likes: number,
+    dislikes: number,
+}
+const MyPosts: React.FC<PropsType> = (props) => {
     return (
         <div className={c.MyPosts}>
             <h3>{props.title}</h3>

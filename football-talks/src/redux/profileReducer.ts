@@ -6,7 +6,7 @@ const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_PROFILE_STATUS = 'profile/SET-USER-PROFILE-STATUS';
 const ADD_POST_TO_PROFILE_PAGE = 'profile/ADD-POST-TO-PROFILE-PAGE';
 
-type PostType = {
+export type PostType = {
     title: string,
     text: string,
     likes: number,
@@ -15,7 +15,7 @@ type PostType = {
 type FriendType = {
     id: number,
 }
-type ProfileType = {
+export type ProfileType = {
     club: string,
     followed: boolean,
     friends?: Array<FriendType>,
@@ -85,7 +85,7 @@ export const addPostToProfilePage = (title: string, text: string): AddPostToProf
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
 
-export const setProfile = (userId: number, token: string): ThunkType => {
+export const setProfile = (userId: string, token: string): ThunkType => {
     return async (dispatch) => {
         let data = await ProfileApi.getProfile(userId, token);
         dispatch(setUserProfile(data));

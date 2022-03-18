@@ -9,9 +9,9 @@ import AuthContainer from './components/content/authorization/AuthContainer';
 import EnterContainer from './components/content/authorization/enter/EnterContainer';
 import DialogsContainer from './components/content/dialogs/DialogsContainer';
 import ProfileContainer from './components/content/profile/ProfileContainer';
-import Footer from './components/footer/Footer.tsx';
+import Footer from './components/footer/Footer';
 import HeaderContainer from './components/header/HeaderContainer';
-import Navbar from './components/navbar/Navbar.tsx';
+import Navbar from './components/navbar/Navbar';
 
 const SavedContainer = React.lazy(() => import('./components/content/saved/SavedContainer'));
 const AddPostContainer = React.lazy(() => import('./components/content/profile/addPost/AddPostContainer'));
@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 }  
 
-export default compose (
+export default compose<React.ComponentType> (
   connect(null, {}),
   withRouter,) (App);
 

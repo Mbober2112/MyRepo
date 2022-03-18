@@ -1,10 +1,21 @@
 import c from './Profile.module.css';
-import React from 'react';
+import React, { ElementRef, ElementType } from 'react';
 import MyPosts from './myPosts/MyPosts';
 import { NavLink } from 'react-router-dom';
 import ProfileStatusWithHooks from './profileStatus/ProfileStatusWithHooks';
+import { MyPostType } from '../../../redux/addPostReducer';
+import { PostType, ProfileType } from '../../../redux/profileReducer';
+import { JsxChild } from 'typescript';
 
-const Profile = (props) => {
+type PropsType = {
+    myPostsData: Array<MyPostType>,
+    profile: ProfileType | null,
+    token: string,
+    postAddedChange: () => void,
+    setStatus: (token: string, status: string) => void,
+}
+
+const Profile: React.FC<PropsType> = (props) => {
 
     let changePostAdded = () => {
         props.postAddedChange();
@@ -20,7 +31,7 @@ const Profile = (props) => {
         return <div></div>
     }
 
-    let myPostsElements;
+    let myPostsElements: Array<any>;
     
     if (!props.profile.posts){
         myPostsElements=[];

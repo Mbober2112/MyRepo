@@ -42,7 +42,7 @@ export const UsersApi = {
 }
 
 export const ProfileApi = {
-    getProfile(userId: number, token: string) {
+    getProfile(userId: string, token: string) {
         return axios.get<UserType>(`http://localhost:8080/user/userpage?id=${userId}`, { headers: { token: token } }).then(response => {
             return response.data;
         });

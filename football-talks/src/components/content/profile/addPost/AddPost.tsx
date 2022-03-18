@@ -1,8 +1,8 @@
 import React from 'react';
 import c from './AddPost.module.css';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
-const AddPostForm = (props) => {
+const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={c.AddPost}>
             <div className={c.Title}>
@@ -18,13 +18,22 @@ const AddPostForm = (props) => {
     )
 }
 
-const AddPostReduxForm = reduxForm({ form: 'addPost' })(AddPostForm);
+const AddPostReduxForm = reduxForm<FormDataType>({ form: 'addPost' })(AddPostForm);
 
-const AddPost = (props) => {
+type AddPostPropsType = {
+    addPost: (title: string, text: string) => void,
+    addPostToServer: (token: string, title: string, text: string) => void,
+    token: string,
+}
+type FormDataType = {
+    title: string,
+    text: string,
+}
+const AddPost: React.FC<AddPostPropsType> = (props) => {
 
-    const onSubmit = (formData) => {
+    const onSubmit = (formData: FormDataType) => {
         props.addPost(formData.title, formData.text);
-        props.addPostToServer(props.token,formData.title, formData.text);
+        props.addPostToServer(props.token, formData.title, formData.text);
     }
 
     return (

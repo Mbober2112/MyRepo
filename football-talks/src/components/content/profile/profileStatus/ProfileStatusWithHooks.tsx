@@ -1,8 +1,14 @@
 import c from './ProfileStatus.module.css';
-import React, { useEffect } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import { useState } from 'react';
+import { ProfileType } from '../../../../redux/profileReducer';
 
-const ProfileStatusWithHooks = (props) => {
+type PropsType = {
+    profile: ProfileType,
+    token: string,
+    setStatus: (token: string, status: string) => void,
+}
+const ProfileStatusWithHooks: React.FC<PropsType> = (props) => {
 
     let [editMode, setEditMode] = useState(false);
     let [status, setNewStatus] = useState(props.profile.status);
@@ -20,7 +26,7 @@ const ProfileStatusWithHooks = (props) => {
         props.setStatus(props.token, status);
     };
 
-    const onStatusChange = (e) => {
+    const onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
         setNewStatus(e.currentTarget.value);
     }
 
