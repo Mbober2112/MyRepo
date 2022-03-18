@@ -4,20 +4,30 @@ import Auth from "./Auth";
 import { onLogin, changeAuthData, loginTC } from "../../../redux/authReducer";
 import { compose } from "redux";
 import { withEnterRedirect } from "../../../hoc/withEnterRedirect";
+import { AppStateType } from "../../../redux/reduxStore";
 
-class AuthContainer extends React.Component {
+type MapStatePropsType = {
+    login: string,
+    pass: string,
+}
+
+type MapDispatchPropsType = {
+    changeAuthData: (login: string, pass: string) => void,
+}
+type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+class AuthContainer extends React.Component<PropsType> {
 
     render () {
         return(
             <Auth login={this.props.login}
                 pass = {this.props.pass}
-                onLogin = {this.props.onLogin}
                 changeAuthData = {this.props.changeAuthData}/>
         )
     }
 }
 
-const mapStateToProps = (state) =>{
+const mapStateToProps = (state: AppStateType): MapStatePropsType =>{
     return {
         login: state.auth.login,
         pass: state.auth.pass,
@@ -25,6 +35,6 @@ const mapStateToProps = (state) =>{
 }
 
 export default compose (
-    connect(mapStateToProps, {onLogin, changeAuthData}),
+    connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {changeAuthData}),
     withEnterRedirect,) (AuthContainer);
     

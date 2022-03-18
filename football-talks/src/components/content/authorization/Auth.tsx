@@ -1,8 +1,12 @@
 import c from './Auth.module.css';
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, InjectedFormProps } from 'redux-form';
 
-const AuthForm = (props) => {
+type FormDataType = {
+    login: string,
+    pass: string,
+}
+const AuthForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div className={c.Items}>
@@ -20,11 +24,17 @@ const AuthForm = (props) => {
     )
 }
 
-const AuthReduxForm = reduxForm({ form: 'auth' })(AuthForm);
+const AuthReduxForm = reduxForm<FormDataType>({ form: 'auth' })(AuthForm);
 
-const Auth = (props) => {
+type AuthPropsType = {
+    login: string,
+    pass: string,
+    changeAuthData: (login: string, pass: string) => void,
+}
 
-    const onSubmit = (formData) => {
+const Auth: React.FC<AuthPropsType> = (props) => {
+
+    const onSubmit = (formData: FormDataType) => {
         props.changeAuthData(formData.login, formData.pass);
     }
 

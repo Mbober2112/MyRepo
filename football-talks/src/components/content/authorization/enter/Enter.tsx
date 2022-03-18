@@ -1,6 +1,9 @@
 import c from './Enter.module.css';
 
-const Enter = (props) => {
+type PropsType = {
+    login: string,
+}
+const Enter = (props: PropsType) => {
     return(
         <div>
             Hello {props.login}!

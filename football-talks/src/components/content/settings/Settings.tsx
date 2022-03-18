@@ -1,7 +1,7 @@
 import { reduxForm, Field } from 'redux-form';
 import c from './Settings.module.css';
 
-const SettingsForm = (props) => {
+const SettingsForm = (props: any) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -40,7 +40,7 @@ const SettingsForm = (props) => {
 const SettingsReduxForm = reduxForm({ form: 'settings' })(SettingsForm);
 
 
-const Settings = (props) => {
+const Settings = (props: any) => {
     return(
         <div>
             <SettingsReduxForm />
