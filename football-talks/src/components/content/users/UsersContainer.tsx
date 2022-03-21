@@ -1,8 +1,9 @@
-import { connect } from "react-redux";
-import { followTC, setCurrentPage, unfollowTC, getUsers, FriendType, UserType } from "../../../redux/usersReducer";
-import Users from "./Users";
 import React from "react";
+import { connect } from "react-redux";
 import { AppStateType } from "../../../redux/reduxStore";
+import { followTC, FriendType, getUsers, setCurrentPage, unfollowTC, UserType } from "../../../redux/usersReducer";
+import Users from "./Users";
+import {allUsersSelector, currentPageSelector, friendsSelector, pageSizeSelector, tokenSelector, TotalUsersCountSelector} from '../../../redux/selectors/UsersSelectors'
 
 type MapDispatchPropsType = {        
     unfollowTC: (token: string, id: number) => void,
@@ -49,12 +50,12 @@ class UsersContainer extends React.Component<PropsType> {
 
 let mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        allUsers: state.allUsersPage.allUsers,
-        pageSize: state.allUsersPage.pageSize,
-        totalUsersCount: state.allUsersPage.totalUsersCount,
-        currentPage: state.allUsersPage.currentPage,
-        token: state.auth.token,
-        friends: state.allUsersPage.friends,
+        allUsers: allUsersSelector(state),
+        pageSize: pageSizeSelector(state),
+        totalUsersCount: TotalUsersCountSelector(state),
+        currentPage: currentPageSelector(state),
+        token: tokenSelector(state),
+        friends: friendsSelector(state),
     }
 }
 
