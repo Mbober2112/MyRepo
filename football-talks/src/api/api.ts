@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { UserType } from '../redux/usersReducer';
 
 type GetUsersType = {
@@ -12,63 +11,47 @@ type ResultType = {
 }
 
 export const UsersApi = {
-    getUsers(pageSize: number, currentPage: number, token: string) {
-        return axios.get<GetUsersType>(`http://localhost:8080/user?id=1&count=${pageSize}&page=${currentPage}`,
-            { headers: { token: token } }).then(response => {
-                return response.data;
-            });
+    getUsers(pageSize: number, currentPage: number, token: string): Promise<GetUsersType> {
+        return fetch(`http://localhost:8080/user?id=1&count=${pageSize}&page=${currentPage}`,
+            {method: 'GET', headers: { token: token } }).then(response => response.json()).then(
+                data => {return data} 
+            );
     },
 
-    // getUsers2(pageSize: number, pageNumber: number, token: string) {
-    //     return axios.get(`http://localhost:8080/user?id=1&count=${pageSize}&page=${pageNumber}`,
-    //         { headers: { token: token } }).then(response => {
-    //             return response.data;
-    //         });
-    // },
-
-    followUser(token: string, id: number) {
-        return axios.post<ResultType>(`http://localhost:8080/follow`, { id: id },
-            { headers: { token: token } }).then(response => {
-                return response.data.result;
-            })
+    followUser(token: string, id: number): Promise<string> {
+        return fetch(`http://localhost:8080/follow`,
+            {method: 'POST', body: JSON.stringify({ id: id }), headers: {'Content-Type': 'application/json', token: token } }).then(response => response.json()).then(
+                data => {return data.result});
     },
 
-    unfollowUser(token: string, id: number) {
-        return axios.delete<ResultType>(`http://localhost:8080/follow`, { headers: { token: token, id: id.toString() } },
-        ).then(response => {
-            return response.data.result;
-        });
+    unfollowUser(token: string, id: number): Promise<string> {
+        return fetch(`http://localhost:8080/follow`, {method: 'DELETE', headers: { token: token, id: id.toString() } },
+        ).then(response => response.json()).then(data => {return data.result});
     },
 }
 
 export const ProfileApi = {
-    getProfile(userId: string, token: string) {
-        return axios.get<UserType>(`http://localhost:8080/user/userpage?id=${userId}`, { headers: { token: token } }).then(response => {
-            return response.data;
-        });
+    getProfile(userId: string, token: string): Promise<UserType> {
+        return fetch(`http://localhost:8080/user/userpage?id=${userId}`, {method: 'GET', headers: { token: token } }).then(response => response.json()).then(
+            data => {return data});
     },
-    changeStatus(token: string, status: string) {
-        
-        return axios.put<string>(`http://localhost:8080/status`, {status: status}, { headers: { token: token } }).then(response => {
-            return response.data;
-            // console.log(response.data);
-        });
+    changeStatus(token: string, status: string): Promise<string> {
+        return fetch(`http://localhost:8080/status`, {method: 'PUT', body: JSON.stringify({status: status}), headers: { token: token } }).then(
+            response => response.json()).then(data => {return data});
     },
 }
 
 export const EnterApi = {
-    enter(login: string, pass: string) {
-        return axios.get<UserType>(`http://localhost:8080/auth`, { headers: { login: login, password: pass } }).then(response => {
-            return response.data.token;
-        })
-    }
+    enter(login: string, pass: string): Promise<string> {
+        return fetch(`http://localhost:8080/auth`, {method:'GET', headers: { login: login, password: pass } }).then(response => response.json()).then(
+            data => {return data.token});
+        }
 }
 
 export const AddPostApi = {
-    addPostToServer(token: string, title: string, text: string) {
-        return axios.post<ResultType>(`http://localhost:8080/addpost`, {title: title, text: text, likes: 0, dislikes: 0 },
-            { headers: { token: token } }).then(response => {
-                return response.data.result;
-            })
+    addPostToServer(token: string, title: string, text: string): Promise<string> {
+        return fetch(`http://localhost:8080/addpost`, {method: 'POST', 
+        body: JSON.stringify({title: title, text: text, likes: 0, dislikes: 0 }), headers: {'Content-Type': 'application/json', token: token } }).then(response => 
+                response.json()).then(data => {return data.result});
     },
 }
