@@ -1,23 +1,41 @@
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { FriendType, UserType } from '../../../redux/usersReducer';
+import { allUsersSelector, currentPageSelector, friendsSelector, pageSizeSelector, tokenSelector, TotalUsersCountSelector } from '../../../redux/selectors/UsersSelectors';
+import { followTC, FriendType, getUsers, setCurrentPage, unfollowTC, UserType } from '../../../redux/usersReducer';
 import c from './Users.module.css';
 
 type PropsType = {
-    totalUsersCount: number,
-    pageSize: number,
-    friends: Array<FriendType>,
-    allUsers: Array<UserType>,
-    token: string,
-    currentPage: number,
-    
-    onPageChanged: (p: number) => void,
-    unfollowTC: (token: string, id: number) => void,
-    followTC: (token: string, id: number) => void,
-
 }
-const Users: React.FC<PropsType> = (props) => {
+export const Users: React.FC<PropsType> = (props) => {
 
-    let pagesCount: number = Math.ceil(props.totalUsersCount / props.pageSize);
+    const allUsers = useSelector(allUsersSelector);
+    const totalUsersCount = useSelector(TotalUsersCountSelector);
+    const pageSize = useSelector(pageSizeSelector);
+    const friends = useSelector(friendsSelector);
+    const token = useSelector(tokenSelector);
+    const currentPage = useSelector(currentPageSelector);
+
+    const dispatch = useDispatch();
+
+    useEffect(()=>{
+        dispatch(getUsers(pageSize, currentPage, token));
+    }, []);
+
+    const getUnfollow =  (token: string, id: number) => {
+        dispatch(unfollowTC(token, id));
+    }
+
+    const getFollow =  (token: string, id: number) => {
+        dispatch(followTC(token, id));
+    }
+
+    const onPageChanged = (pageNumber: number) => {
+        dispatch(setCurrentPage(pageNumber));
+        dispatch(getUsers(pageSize, pageNumber, token));
+    }
+
+    let pagesCount: number = Math.ceil(totalUsersCount / pageSize);
 
     let pages: Array<number> = [];
     let follow: boolean;
@@ -26,17 +44,17 @@ const Users: React.FC<PropsType> = (props) => {
         pages.push(i);
     }
 
-    if (!props.friends) {
+    if (!friends) {
         return <div></div>
     }
 
     return (
         <div>
             {
-                props.allUsers.map(au => {
+                allUsers.map(au => {
                     follow = false;
-                    for (let i = 0; i < props.friends.length; i++) {
-                        if (au.id === props.friends[i].id) {
+                    for (let i = 0; i < friends.length; i++) {
+                        if (au.id === friends[i].id) {
                             follow = true;
                         }
                     }
@@ -55,16 +73,14 @@ const Users: React.FC<PropsType> = (props) => {
                             </div>
                         </div>
                         {follow
-                            ? <button onClick={() => {props.unfollowTC(props.token, au.id)}}>Отписаться</button>
-                            : <button onClick={() =>{props.followTC(props.token, au.id)}}>Подписаться</button>}<hr />
+                            ? <button onClick={() => {getUnfollow(token, au.id)}}>Отписаться</button>
+                            : <button onClick={() =>{getFollow(token, au.id)}}>Подписаться</button>}<hr />
                     </div>
                 })
             }
             <div className={c.Pages}>
-                {pages.map(p => <span className={(props.currentPage === p && c.Selected) as string}  onClick={() => props.onPageChanged(p)}>{p}</span>)}
+                {pages.map(p => <span className={(currentPage === p && c.Selected) as string}  onClick={() => onPageChanged(p)}>{p}</span>)}
             </div>
         </div>
     )
 }
-
-export default Users;
