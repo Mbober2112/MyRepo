@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-import { allUsersSelector, currentPageSelector, friendsSelector, pageSizeSelector, tokenSelector, TotalUsersCountSelector } from '../../../redux/selectors/UsersSelectors';
+import { tokenSelector } from '../../../redux/selectors/GeneralSelectors';
+import { allUsersSelector, currentPageSelector, friendsSelector, pageSizeSelector, TotalUsersCountSelector } from '../../../redux/selectors/UsersSelectors';
 import { followTC, FriendType, getUsers, setCurrentPage, unfollowTC, UserType } from '../../../redux/usersReducer';
 import c from './Users.module.css';
 

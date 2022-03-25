@@ -16,10 +16,6 @@ export const currentPageSelector = (state: AppStateType) => {
     return state.allUsersPage.currentPage;
 }
 
-export const tokenSelector = (state: AppStateType) => {
-    return state.auth.token;
-}
-
 export const friendsSelector = (state: AppStateType) => {
     return state.allUsersPage.friends;
 }

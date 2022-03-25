@@ -6,6 +6,8 @@ import { addPost,} from '../../../../redux/addPostReducer';
 import AddPost from './AddPost';
 import { addPostToServer } from '../../../../redux/profileReducer';
 import { AppStateType } from '../../../../redux/reduxStore';
+import { tokenSelector } from '../../../../redux/selectors/GeneralSelectors';
+import { newPostTextSelector, newPostTitleSelector } from '../../../../redux/selectors/AddPostSelectors';
 
 type MapStatePropsType = {
     newPostTitle: string,
@@ -19,9 +21,9 @@ type MapDispatchPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        newPostTitle: state.addPostState.profilePage.newPostTitle,
-        newPostText: state.addPostState.profilePage.newPostText,
-        token: state.auth.token,
+        newPostTitle: newPostTitleSelector(state),
+        newPostText: newPostTextSelector(state),
+        token: tokenSelector(state),
     }
 }
 

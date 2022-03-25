@@ -5,6 +5,9 @@ import { AppStateType } from "./reduxStore";
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_PROFILE_STATUS = 'profile/SET-USER-PROFILE-STATUS';
 const ADD_POST_TO_PROFILE_PAGE = 'profile/ADD-POST-TO-PROFILE-PAGE';
+export const SET_PROFILE = 'profile/SET-PROFILE';
+export const SET_STATUS = 'profile/SET-STATUS';
+export const ADD_POST = 'profile/ADD-POST';
 
 export type PostType = {
     title: string,
@@ -83,29 +86,8 @@ export const setUserProfile = (profile: ProfileType): SetUserProfileActionType =
 export const setUserProfileStatus = (status: string): SetUserProfileStatusActionType => ({ type: SET_USER_PROFILE_STATUS, status: status });
 export const addPostToProfilePage = (title: string, text: string): AddPostToProfilePageActionType => ({ type: ADD_POST_TO_PROFILE_PAGE, title: title, text: text });
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
-
-export const setProfile = (userId: string, token: string): ThunkType => {
-    return async (dispatch) => {
-        let data = await ProfileApi.getProfile(userId, token);
-        dispatch(setUserProfile(data));
-    }
-}
-
-export const setStatus = (token: string, status: string): ThunkType => {
-    return async (dispatch) => {
-        let data = await ProfileApi.changeStatus(token, status);
-        dispatch(setUserProfileStatus(data));
-    }
-}
-
-export const addPostToServer = (token: string, title: string, text: string): ThunkType => {
-    return async (dispatch) => {
-        let result = await AddPostApi.addPostToServer(token, title, text);
-        if (result === 'ok') {
-            dispatch(addPostToProfilePage(title, text));
-        }
-    }
-}
+export const setProfile = (userId: string, token: string) => ({type: SET_PROFILE, userId: userId, token: token});
+export const setStatus = (token: string, status: string) => ({type: SET_STATUS, token: token, status: status});
+export const addPostToServer = (token: string, title: string, text: string) => ({type: ADD_POST, token: token, title: title, text: text});
 
 export default ProfileReducer;

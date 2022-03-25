@@ -8,6 +8,9 @@ const SET_USERS = 'users/SET-USERS';
 const SET_CURRENT_PAGE = 'users/SET-CURRENT-PAGE';
 const SET_TOTAL_USERS_COUNT = 'users/SET-TOTAL-USERS-COUNT';
 const SET_FRIEND = 'users/SET-FRIEND';
+export const GET_USERS = 'users/GET-USERS';
+export const GET_FOLLOW = 'users/GET-FOLLOW';
+export const GET_UNFOLLOW = 'users/GET-UNFOLLOW';
 
 type PostType = {
     title: string,
@@ -113,33 +116,8 @@ export const setCurrentPage = (pageNumber: number): SetCurrentPageActionType => 
 export const setTotalUsersCount = (totalCount: number): SetTotalUsersCountActionType => ({type: SET_TOTAL_USERS_COUNT, totalCount: totalCount, });
 export const setFriend = (friend: Array<FriendType> | undefined): SetFriendActionType => ({ type: SET_FRIEND, friend: friend, });
 
-type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>;
-
-export const getUsers = (pageSize: number, currentPage: number, token: string): ThunkType => {
-    return async (dispatch, getState) => {
-        let data = await UsersApi.getUsers(pageSize, currentPage, token);
-            dispatch(setUsers(data.usersSend));
-            dispatch(setTotalUsersCount(data.totalCount));
-            dispatch(setFriend(data.currentUser.friends));
-    }
-}
-
-export const followTC = (token: string, id: number) : ThunkType => {
-    return async (dispatch) => {
-        let result = await UsersApi.followUser(token, id);
-            if (result === 'ok'){
-                dispatch(follow(id));
-            }
-    }
-}
-
-export const unfollowTC = (token: string, id: number): ThunkType => {
-    return async (dispatch) => {
-        let result = await UsersApi.unfollowUser(token, id);
-            if (result === 'ok'){
-                dispatch(unfollow(id));
-            } 
-    }
-}
+export const getUsers = (pageSize: number, currentPage: number, token: string) => ({type: GET_USERS, pageSize: pageSize, currentPage: currentPage, token: token})
+export const followTC = (token: string, id: number) => ({type: GET_FOLLOW, token: token, id: id})
+export const unfollowTC = (token: string, id: number) => ({type: GET_UNFOLLOW, token: token, id: id})
 
 export default UsersReducer;

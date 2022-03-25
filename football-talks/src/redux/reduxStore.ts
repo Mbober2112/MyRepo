@@ -6,6 +6,8 @@ import ProfileReducer from "./profileReducer";
 import UsersReducer from "./usersReducer";
 import thunkMiddleware from 'redux-thunk';
 import {reducer as formReducer} from 'redux-form';
+import createSagaMiddleware from 'redux-saga';
+import { addPostWatcher, authWatcher, followWatcher, getUsersWatcher, setProfileWatcher, setStatusWatcher, unfollowWatcher} from "./sagas";
 
 let rootReducer = combineReducers({
     addPostState: AddPostReducer,
@@ -19,7 +21,14 @@ let rootReducer = combineReducers({
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>;
 
-
-let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const sagaMiddleware = createSagaMiddleware();
+let store = createStore(rootReducer, applyMiddleware(thunkMiddleware, sagaMiddleware));
+sagaMiddleware.run(authWatcher);
+sagaMiddleware.run(getUsersWatcher);
+sagaMiddleware.run(followWatcher);
+sagaMiddleware.run(unfollowWatcher);
+sagaMiddleware.run(setProfileWatcher);
+sagaMiddleware.run(setStatusWatcher);
+sagaMiddleware.run(addPostWatcher);
 
 export default store;

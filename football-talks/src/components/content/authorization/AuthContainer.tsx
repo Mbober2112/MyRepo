@@ -5,6 +5,7 @@ import { onLogin, changeAuthData, loginTC } from "../../../redux/authReducer";
 import { compose } from "redux";
 import { withEnterRedirect } from "../../../hoc/withEnterRedirect";
 import { AppStateType } from "../../../redux/reduxStore";
+import { loginSelector, passwordSelector } from "../../../redux/selectors/GeneralSelectors";
 
 type MapStatePropsType = {
     login: string,
@@ -29,8 +30,8 @@ class AuthContainer extends React.Component<PropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType =>{
     return {
-        login: state.auth.login,
-        pass: state.auth.pass,
+        login: loginSelector(state),
+        pass: passwordSelector(state),
     }
 }
 

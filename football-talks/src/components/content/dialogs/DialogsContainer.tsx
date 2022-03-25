@@ -4,6 +4,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import {DialogType, MessageType, sendMessage } from '../../../redux/dialogsReducer';
 import { AppStateType } from '../../../redux/reduxStore';
+import { dialogsDataSelector, messagesDataSelector } from '../../../redux/selectors/DialogsSelectors';
 import Dialogs from './Dialogs';
 
 type MapStatePropsType = {
@@ -18,8 +19,8 @@ type MapDispatchPropsType = {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 
     return {
-        dialogsData: state.dialogsPage.dialogsData,
-        messagesData: state.dialogsPage.messagesData,
+        dialogsData: dialogsDataSelector(state),
+        messagesData: messagesDataSelector(state),
     }
 }
 

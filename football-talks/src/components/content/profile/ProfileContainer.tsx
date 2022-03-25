@@ -7,6 +7,7 @@ import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
 import { compose } from 'redux';
 import { MyPostType, postAddedChange} from '../../../redux/addPostReducer';
 import { AppStateType } from '../../../redux/reduxStore';
+import { myPostsDataSelector, profileSelector } from '../../../redux/selectors/ProfileSelectors';
 
 type MapStatePropsType = {
     myPostsData: Array<MyPostType>,
@@ -52,8 +53,8 @@ class ProfileContainer extends React.Component<PropsType & RouteComponentProps<P
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        myPostsData: state.addPostState.profilePage.myPostsData,
-        profile: state.profilePageData.profile,
+        myPostsData: myPostsDataSelector(state),
+        profile: profileSelector(state),
     }
 }
 

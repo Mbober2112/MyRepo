@@ -198,7 +198,7 @@ app.put ('/status', (req, res, next) => {
             }
         }
     user.status = status;        
-    res.send(status);
+    res.send('lol');
 });
 
 app.listen(8080, () => {console.log('started')} );
