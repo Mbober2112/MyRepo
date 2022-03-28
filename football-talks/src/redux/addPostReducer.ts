@@ -1,5 +1,4 @@
 // import { actionTypes } from "redux-form";
-import { AddPostApi } from "../api/api";
 
 const ADD_POST = 'addPost/ADD-POST';
 const CHANGE_NEW_POST = 'addPost/CHANGE-NEW-POST';

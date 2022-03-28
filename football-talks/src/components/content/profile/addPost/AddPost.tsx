@@ -1,6 +1,12 @@
 import React from 'react';
 import c from './AddPost.module.css';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { tokenSelector } from '../../../../redux/selectors/GeneralSelectors';
+import { addPost } from '../../../../redux/addPostReducer';
+import { addPostToServer } from '../../../../redux/profileReducer';
+import { compose } from 'redux';
+import { withProfileRedirect } from '../../../../hoc/withProfileRedirect';
 
 const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
@@ -21,9 +27,7 @@ const AddPostForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const AddPostReduxForm = reduxForm<FormDataType>({ form: 'addPost' })(AddPostForm);
 
 type AddPostPropsType = {
-    addPost: (title: string, text: string) => void,
-    addPostToServer: (token: string, title: string, text: string) => void,
-    token: string,
+    
 }
 type FormDataType = {
     title: string,
@@ -31,9 +35,13 @@ type FormDataType = {
 }
 const AddPost: React.FC<AddPostPropsType> = (props) => {
 
+    const token = useSelector(tokenSelector);
+
+    const dispatch = useDispatch();
+
     const onSubmit = (formData: FormDataType) => {
-        props.addPost(formData.title, formData.text);
-        props.addPostToServer(props.token, formData.title, formData.text);
+        dispatch(addPost(formData.title, formData.text));
+        dispatch(addPostToServer(token, formData.title, formData.text));
     }
 
     return (
@@ -41,4 +49,4 @@ const AddPost: React.FC<AddPostPropsType> = (props) => {
     )
 }
 
-export default AddPost;
+export default compose(withProfileRedirect)(AddPost);

@@ -1,13 +1,12 @@
 import { useSelector } from 'react-redux';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../../hoc/withAuthRedirect';
-import { AllPostType } from '../../../redux/addPostReducer';
 import { allPostsDataSelector } from '../../../redux/selectors/GeneralSelectors';
 import c from './Saved.module.css';
 import SavedPost from './savedPost/SavedPost';
 
 type PropsType = {
-    // allPostsData: Array<AllPostType>
+    
 }
 const Saved: React.FC<PropsType> = (props) => {
 

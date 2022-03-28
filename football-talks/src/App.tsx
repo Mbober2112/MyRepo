@@ -5,40 +5,43 @@ import { Route } from 'react-router-dom';
 import { compose } from 'redux';
 import c from './App.module.css';
 import AllPosts from './components/content/allPosts/AllPosts';
-import AuthContainer from './components/content/authorization/AuthContainer';
+import Auth from './components/content/authorization/Auth';
 import Enter from './components/content/authorization/enter/Enter';
-import DialogsContainer from './components/content/dialogs/DialogsContainer';
+import Dialogs from './components/content/dialogs/Dialogs';
+import Friends from './components/content/friends/Friends';
+import AddPost from './components/content/profile/addPost/AddPost';
 import ProfileContainer from './components/content/profile/ProfileContainer';
 import Saved from './components/content/saved/Saved';
+import { Settings } from './components/content/settings/Settings';
 import { Users } from './components/content/users/Users';
 import Footer from './components/footer/Footer';
-import HeaderContainer from './components/header/HeaderContainer';
+import { Header } from './components/header/Header';
 import Navbar from './components/navbar/Navbar';
 
-//const SavedContainer = React.lazy(() => import('./components/content/saved/SavedContainer'));
-const AddPostContainer = React.lazy(() => import('./components/content/profile/addPost/AddPostContainer'));
-// const UsersContainer = React.lazy(() => import('./components/content/users/UsersContainer'));
-const Friends = React.lazy(() => import('./components/content/friends/Friends'));
-const SettingsContainer = React.lazy(() => import('./components/content/settings/SettingsContainer'));
+// const Saved = React.lazy(() => import('./components/content/saved/Saved'));
+// const AddPost = React.lazy(() => import('./components/content/profile/addPost/AddPost'));
+// const Users = React.lazy(() => import('./components/content/users/Users'));
+// const Friends = React.lazy(() => import('./components/content/friends/Friends'));
+//const SettingsContainer = React.lazy(() => import('./components/content/settings/SettingsContainer'));
 
 class App extends React.Component {
   render () {
     return (
       <div className={c.App}>
-        <HeaderContainer />
+        <Header />
         <div className={c.Page}>
           <Navbar />
           <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-          <Route path="/dialogs" render={() => <DialogsContainer />} />
+          <Route path="/dialogs" render={() => <Dialogs />} />
           <Route path="/allposts" render={() => <AllPosts />} />
           <React.Suspense fallback={<div>Loading...</div>}>
             <Route path="/saved" render={() => <Saved />} />
-            <Route path="/addPost" render={() => <AddPostContainer/>} />
+            <Route path="/addPost" render={() => <AddPost/>} />
             <Route path="/users" render={() => <Users />} />
             <Route path="/friends" render={() => <Friends />} />
-            <Route path="/settings" render={() => <SettingsContainer />} />
+            <Route path="/settings" render={() => <Settings />} />
           </React.Suspense>
-          <Route path="/auth" render={() => <AuthContainer />} />
+          <Route path="/auth" render={() => <Auth />} />
           <Route path="/enter" render={() => <Enter />} />
         </div>
         <Footer />
@@ -50,28 +53,3 @@ class App extends React.Component {
 export default compose<React.ComponentType> (
   connect(null, {}),
   withRouter,) (App);
-
-
-// }= (props) => {
-//   return (
-//     <div className={c.App}>
-//       <HeaderContainer />
-//       <div className={c.Page}>
-//         <Navbar />
-//         <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-//         <Route path="/dialogs" render={() => <DialogsContainer />} />
-//         <Route path="/allposts" render={() => <AllPostsContainer />} />
-//         <Route path="/saved" render={() => <SavedContainer />} />
-//         <Route path="/addPost" render={() => <AddPostContainer/>} />
-//         <Route path="/users" render={() => <UsersContainer />} />
-//         <Route path="/friends" render={() => <Friends />} />
-//         <Route path="/settings" render={() => <SettingsContainer />} />
-//         <Route path="/auth" render={() => <AuthContainer />} />
-//         <Route path="/enter" render={() => <EnterContainer />} />
-//       </div>
-//       <Footer />
-//     </div>
-//   );
-// }
-
-// export default App;

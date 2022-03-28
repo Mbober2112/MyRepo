@@ -1,7 +1,3 @@
-import { ThunkAction } from "redux-thunk";
-import { UsersApi } from "../api/api";
-import { AppStateType } from "./reduxStore";
-
 const FOLLOW = 'users/FOLLOW';
 const UNFOLLOW = 'users/UNFOLLOW';
 const SET_USERS = 'users/SET-USERS';

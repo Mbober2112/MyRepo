@@ -1,8 +1,9 @@
-import { call, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { AnyAction } from "redux";
+import { call, CallEffect, put, PutEffect, takeEvery, takeLatest } from "redux-saga/effects";
 import { AddPostApi, EnterApi, ProfileApi, UsersApi} from "../api/api";
 import { setUserToken, NEW_TYPE, GET_TOKEN } from "./authReducer";
 import { addPostToProfilePage, ADD_POST, setUserProfile, setUserProfileStatus, SET_PROFILE, SET_STATUS } from "./profileReducer";
-import { follow, GET_FOLLOW, GET_UNFOLLOW, GET_USERS, setFriend, setTotalUsersCount, setUsers, unfollow } from "./usersReducer";
+import { follow, GET_FOLLOW, GET_UNFOLLOW, GET_USERS, setFriend, setTotalUsersCount, setUsers, unfollow, UserType } from "./usersReducer";
 
 // --authReducer sagas
 

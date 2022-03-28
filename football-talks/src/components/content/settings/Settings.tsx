@@ -40,12 +40,10 @@ const SettingsForm = (props: any) => {
 const SettingsReduxForm = reduxForm({ form: 'settings' })(SettingsForm);
 
 
-const Settings = (props: any) => {
+export const Settings = (props: any) => {
     return(
         <div>
             <SettingsReduxForm />
         </div>
     )
 }
-
-export default Settings;

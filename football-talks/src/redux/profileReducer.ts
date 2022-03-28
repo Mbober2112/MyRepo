@@ -1,7 +1,3 @@
-import { ThunkAction } from "redux-thunk";
-import { AddPostApi, ProfileApi } from "../api/api";
-import { AppStateType } from "./reduxStore";
-
 const SET_USER_PROFILE = 'profile/SET-USER-PROFILE';
 const SET_USER_PROFILE_STATUS = 'profile/SET-USER-PROFILE-STATUS';
 const ADD_POST_TO_PROFILE_PAGE = 'profile/ADD-POST-TO-PROFILE-PAGE';

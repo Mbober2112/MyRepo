@@ -1,6 +1,11 @@
 import c from './Auth.module.css';
 import React from 'react';
 import { reduxForm, Field, InjectedFormProps } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginSelector, passwordSelector } from '../../../redux/selectors/GeneralSelectors';
+import { changeAuthData } from '../../../redux/authReducer';
+import { withEnterRedirect } from '../../../hoc/withEnterRedirect';
+import { compose } from 'redux';
 
 type FormDataType = {
     login: string,
@@ -27,15 +32,17 @@ const AuthForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 const AuthReduxForm = reduxForm<FormDataType>({ form: 'auth' })(AuthForm);
 
 type AuthPropsType = {
-    login: string,
-    pass: string,
-    changeAuthData: (login: string, pass: string) => void,
+    
 }
 
 const Auth: React.FC<AuthPropsType> = (props) => {
+    const login = useSelector(loginSelector);
+    const pass = useSelector(passwordSelector);
+
+    const dispatch = useDispatch();
 
     const onSubmit = (formData: FormDataType) => {
-        props.changeAuthData(formData.login, formData.pass);
+        dispatch(changeAuthData(formData.login, formData.pass));
     }
 
     return (
@@ -45,4 +52,4 @@ const Auth: React.FC<AuthPropsType> = (props) => {
     )
 }
 
-export default Auth;
+export default compose(withEnterRedirect)(Auth);

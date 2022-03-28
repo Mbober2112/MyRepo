@@ -1,7 +1,3 @@
-import { ThunkAction } from "redux-thunk";
-import { EnterApi } from "../api/api";
-import { AppStateType } from "./reduxStore";
-
 const LOGIN = 'auth/LOGIN';
 const CHANGE_AUTH_DATA = 'auth/CHANGE-AUTH-DATA';
 const SET_USER_TOKEN = 'auth/SET-USER-TOKEN';

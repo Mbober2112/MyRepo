@@ -1,12 +1,11 @@
 import c from './AllPosts.module.css';
 import Post from './post/Post';
 import React from 'react';
-import { AllPostType } from '../../../redux/addPostReducer';
 import { useSelector } from 'react-redux';
 import { allPostsDataSelector } from '../../../redux/selectors/GeneralSelectors';
 
 type PropsType = {
-    //allPostsData: Array<AllPostType>,
+    
 }
 const AllPosts: React.FC<PropsType> = (props) => {
 

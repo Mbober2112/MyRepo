@@ -7,10 +7,6 @@ export type GetUsersType = {
     usersSend: Array<UserType>,  
 }
 
-type ResultType = {
-    result: string,
-}
-
 export const UsersApi = {
     getUsers(pageSize: number, currentPage: number, token: string): Promise<GetUsersType> {
         return fetch(`http://localhost:8080/user?id=1&count=${pageSize}&page=${currentPage}`,
@@ -53,6 +49,5 @@ export const AddPostApi = {
         return fetch(`http://localhost:8080/addpost`, {method: 'POST', 
         body: JSON.stringify({title: title, text: text, likes: 0, dislikes: 0 }), headers: {
         'Content-Type': 'application/json', token: token } }).then(response => response.json())
-        // .then(data => {return data.result});
     },
 }
